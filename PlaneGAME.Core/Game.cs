@@ -29,7 +29,7 @@ namespace PlaneGAME
             // TODO: Add your initialization logic here
             ballPosition = new Vector2(_graphics.PreferredBackBufferWidth / 2,
             _graphics.PreferredBackBufferHeight / 2);
-            ballSpeed = 400f;
+            ballSpeed = 500f;
             base.Initialize();
         }
 
@@ -61,6 +61,28 @@ namespace PlaneGAME
 
                 if (kstate.IsKeyDown(Keys.Down))
                     ballPosition.Y += ballSpeed * (float)gameTime.ElapsedGameTime.TotalSeconds;
+
+                if (kstate.IsKeyDown(Keys.Left))
+                {
+                    ballPosition.X -= ballSpeed * (float)gameTime.ElapsedGameTime.TotalSeconds;
+                    ballTexture = Content.Load<Texture2D>("plane_red_invert");
+                }
+
+                if (kstate.IsKeyDown(Keys.Right))
+                {
+                    ballPosition.X += ballSpeed * (float)gameTime.ElapsedGameTime.TotalSeconds;
+                    ballTexture = Content.Load<Texture2D>("plane_red");
+                }
+
+                if (ballPosition.X > _graphics.PreferredBackBufferWidth - ballTexture.Width / 10)
+                    ballPosition.X = _graphics.PreferredBackBufferWidth - ballTexture.Width / 10;
+                else if (ballPosition.X < ballTexture.Width / 10)
+                    ballPosition.X = ballTexture.Width / 10;
+
+                if (ballPosition.Y > _graphics.PreferredBackBufferHeight - ballTexture.Height / 10)
+                    ballPosition.Y = _graphics.PreferredBackBufferHeight - ballTexture.Height / 10;
+                else if (ballPosition.Y < ballTexture.Height / 10)
+                    ballPosition.Y = ballTexture.Height / 10;
             }
 
             base.Update(gameTime);
