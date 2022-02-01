@@ -9,14 +9,19 @@ namespace PlaneGAME
         private GraphicsDeviceManager _graphics;
         private SpriteBatch _spriteBatch;
         Texture2D ballTexture;
+        Texture2D background;
         Vector2 ballPosition;
         float ballSpeed;
+        bool pause = false;
 
         public PlaneGAMEGame()
         {
             _graphics = new GraphicsDeviceManager(this);
+
+            _graphics.PreferredBackBufferWidth = 1920;
+            _graphics.PreferredBackBufferHeight = 1080;
             Content.RootDirectory = "Content";
-            IsMouseVisible = true;
+            IsMouseVisible = false;
         }
 
         protected override void Initialize()
@@ -24,7 +29,7 @@ namespace PlaneGAME
             // TODO: Add your initialization logic here
             ballPosition = new Vector2(_graphics.PreferredBackBufferWidth / 2,
             _graphics.PreferredBackBufferHeight / 2);
-            ballSpeed = 100f;
+            ballSpeed = 400f;
             base.Initialize();
         }
 
@@ -32,7 +37,8 @@ namespace PlaneGAME
         {
             _spriteBatch = new SpriteBatch(GraphicsDevice);
 
-            ballTexture = Content.Load<Texture2D>("ball");
+            background = Content.Load<Texture2D>("background");
+            ballTexture = Content.Load<Texture2D>("plane_red");
             // TODO: use this.Content to load your game content here
         }
 
@@ -41,21 +47,21 @@ namespace PlaneGAME
             if (GamePad.GetState(PlayerIndex.One).Buttons.Back == ButtonState.Pressed || Keyboard.GetState().IsKeyDown(Keys.Escape))
                 Exit();
 
-            // TODO: Add your update logic here
-
             var kstate = Keyboard.GetState();
 
-            if (kstate.IsKeyDown(Keys.Up))
-                ballPosition.Y -= ballSpeed * (float)gameTime.ElapsedGameTime.TotalSeconds;
+            if (kstate.IsKeyDown(Keys.P))
+            {
+                pause = !pause;
+            }
 
-            if (kstate.IsKeyDown(Keys.Down))
-                ballPosition.Y += ballSpeed * (float)gameTime.ElapsedGameTime.TotalSeconds;
+            if (!pause)
+            {
+                if (kstate.IsKeyDown(Keys.Up))
+                    ballPosition.Y -= ballSpeed * (float)gameTime.ElapsedGameTime.TotalSeconds;
 
-            if (kstate.IsKeyDown(Keys.Left))
-                ballPosition.X -= ballSpeed * (float)gameTime.ElapsedGameTime.TotalSeconds;
-
-            if (kstate.IsKeyDown(Keys.Right))
-                ballPosition.X += ballSpeed * (float)gameTime.ElapsedGameTime.TotalSeconds;
+                if (kstate.IsKeyDown(Keys.Down))
+                    ballPosition.Y += ballSpeed * (float)gameTime.ElapsedGameTime.TotalSeconds;
+            }
 
             base.Update(gameTime);
         }
@@ -66,6 +72,7 @@ namespace PlaneGAME
 
             // TODO: Add your drawing code here
             _spriteBatch.Begin();
+            _spriteBatch.Draw(background, new Rectangle(0, 0, 1920, 1080), Color.White);
             _spriteBatch.Draw(
                 ballTexture,
                 ballPosition,
@@ -73,7 +80,7 @@ namespace PlaneGAME
                 Color.White,
                 0f,
                 new Vector2(ballTexture.Width / 2, ballTexture.Height / 2),
-                Vector2.One,
+                new Vector2((float)0.2, (float)0.2),
                 SpriteEffects.None,
                 0f
             );
