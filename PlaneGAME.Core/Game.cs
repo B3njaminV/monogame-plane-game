@@ -1,6 +1,7 @@
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
+using PlaneGAME.Core.Game;
 
 namespace PlaneGAME
 {
@@ -9,6 +10,7 @@ namespace PlaneGAME
         private GraphicsDeviceManager _graphics;
         private SpriteBatch _spriteBatch;
         Texture2D ballTexture;
+        Texture2D torpilleTexture;
         Texture2D background;
         Vector2 ballPosition;
         float ballSpeed;
@@ -29,6 +31,7 @@ namespace PlaneGAME
             // TODO: Add your initialization logic here
             ballPosition = new Vector2(_graphics.PreferredBackBufferWidth / 2,
             _graphics.PreferredBackBufferHeight / 2);
+            Torpille torpille = new Torpille();
             ballSpeed = 500f;
             base.Initialize();
         }
@@ -37,6 +40,7 @@ namespace PlaneGAME
         {
             _spriteBatch = new SpriteBatch(GraphicsDevice);
 
+            torpilleTexture = Content.Load<Texture2D>("torpedo_black_revert");
             background = Content.Load<Texture2D>("background");
             ballTexture = Content.Load<Texture2D>("plane");
             // TODO: use this.Content to load your game content here
@@ -95,6 +99,17 @@ namespace PlaneGAME
             // TODO: Add your drawing code here
             _spriteBatch.Begin();
             _spriteBatch.Draw(background, new Rectangle(0, 0, 1920, 1080), Color.White);
+            _spriteBatch.Draw(
+                ballTexture,
+                ballPosition,
+                null,
+                Color.White,
+                0f,
+                new Vector2(ballTexture.Width / 2, ballTexture.Height / 2),
+                new Vector2((float)0.5, (float)0.5),
+                SpriteEffects.None,
+                0f
+            );
             _spriteBatch.Draw(
                 ballTexture,
                 ballPosition,
