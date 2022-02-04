@@ -38,7 +38,7 @@ namespace PlaneGAME
             _spriteBatch = new SpriteBatch(GraphicsDevice);
 
             background = Content.Load<Texture2D>("background");
-            ballTexture = Content.Load<Texture2D>("plane_red");
+            ballTexture = Content.Load<Texture2D>("plane");
             // TODO: use this.Content to load your game content here
         }
 
@@ -65,24 +65,24 @@ namespace PlaneGAME
                 if (kstate.IsKeyDown(Keys.Left))
                 {
                     ballPosition.X -= ballSpeed * (float)gameTime.ElapsedGameTime.TotalSeconds;
-                    ballTexture = Content.Load<Texture2D>("plane_red_invert");
+                    ballTexture = Content.Load<Texture2D>("plane_revert");
                 }
 
                 if (kstate.IsKeyDown(Keys.Right))
                 {
                     ballPosition.X += ballSpeed * (float)gameTime.ElapsedGameTime.TotalSeconds;
-                    ballTexture = Content.Load<Texture2D>("plane_red");
+                    ballTexture = Content.Load<Texture2D>("plane");
                 }
 
-                if (ballPosition.X > _graphics.PreferredBackBufferWidth - ballTexture.Width / 10)
-                    ballPosition.X = _graphics.PreferredBackBufferWidth - ballTexture.Width / 10;
-                else if (ballPosition.X < ballTexture.Width / 10)
-                    ballPosition.X = ballTexture.Width / 10;
+                if (ballPosition.X > _graphics.PreferredBackBufferWidth - ballTexture.Width / 5)
+                    ballPosition.X = _graphics.PreferredBackBufferWidth - ballTexture.Width / 5;
+                else if (ballPosition.X < ballTexture.Width / 5)
+                    ballPosition.X = ballTexture.Width / 5;
 
-                if (ballPosition.Y > _graphics.PreferredBackBufferHeight - ballTexture.Height / 10)
-                    ballPosition.Y = _graphics.PreferredBackBufferHeight - ballTexture.Height / 10;
-                else if (ballPosition.Y < ballTexture.Height / 10)
-                    ballPosition.Y = ballTexture.Height / 10;
+                if (ballPosition.Y > _graphics.PreferredBackBufferHeight - ballTexture.Height / 5)
+                    ballPosition.Y = _graphics.PreferredBackBufferHeight - ballTexture.Height / 5;
+                else if (ballPosition.Y < ballTexture.Height / 5)
+                    ballPosition.Y = ballTexture.Height / 5;
             }
 
             base.Update(gameTime);
@@ -102,7 +102,7 @@ namespace PlaneGAME
                 Color.White,
                 0f,
                 new Vector2(ballTexture.Width / 2, ballTexture.Height / 2),
-                new Vector2((float)0.2, (float)0.2),
+                new Vector2((float)0.5, (float)0.5),
                 SpriteEffects.None,
                 0f
             );
