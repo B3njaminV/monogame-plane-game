@@ -12,10 +12,11 @@ namespace PlaneGAME.Core.Game
         public Vector2 torpillePosition;
         float speed;
 
-        public Torpille()
+        public Torpille(float x)
         {
-            torpillePosition.Y = 500;
-            torpillePosition.X = 2000;
+            Random rand = new Random();
+            torpillePosition.Y = rand.Next(50,1030);
+            torpillePosition.X = x;
             speed = 500f;
         }
 

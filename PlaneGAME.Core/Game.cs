@@ -10,13 +10,22 @@ namespace PlaneGAME
     {
         private GraphicsDeviceManager _graphics;
         private SpriteBatch _spriteBatch;
-        Texture2D ballTexture;
+        Texture2D avionTexture;
         Texture2D torpilleTexture;
         Texture2D background;
+        Avion avion;
+        Rectangle avionHitbox;
+        Vector2 avionPosition;
+        float speed;
         Torpille torpille;
         Vector2 torpillePosition = Vector2.Zero;
-        Vector2 ballPosition;
-        float ballSpeed;
+        Rectangle torpilleHitbox;
+        Torpille torpille2;
+        Vector2 torpillePosition2 = Vector2.Zero;
+        Rectangle torpilleHitbox2;
+        Torpille torpille3;
+        Vector2 torpillePosition3 = Vector2.Zero;
+        Rectangle torpilleHitbox3;
         bool pause = false;
 
         public PlaneGAMEGame()
@@ -25,6 +34,7 @@ namespace PlaneGAME
 
             _graphics.PreferredBackBufferWidth = 1920;
             _graphics.PreferredBackBufferHeight = 1080;
+            //_graphics.IsFullScreen = true;
             Content.RootDirectory = "Content";
             IsMouseVisible = false;
         }
@@ -32,11 +42,15 @@ namespace PlaneGAME
         protected override void Initialize()
         {
             // TODO: Add your initialization logic here
-            ballPosition = new Vector2(_graphics.PreferredBackBufferWidth / 2,
-            _graphics.PreferredBackBufferHeight / 2);
-            torpille = new Torpille();
+            avion = new Avion();
+            avionPosition = new Vector2(avion.avionPosition.X,avion.avionPosition.Y);
+            speed = 1000f;
+            torpille = new Torpille(2000);
             torpillePosition = new Vector2(torpille.torpillePosition.X, torpille.torpillePosition.Y);
-            ballSpeed = 1000f;
+            torpille2 = new Torpille(2500);
+            torpillePosition2 = new Vector2(torpille2.torpillePosition.X, torpille2.torpillePosition.Y);
+            torpille3 = new Torpille(3000);
+            torpillePosition3 = new Vector2(torpille3.torpillePosition.X, torpille3.torpillePosition.Y);
             base.Initialize();
         }
 
@@ -46,7 +60,7 @@ namespace PlaneGAME
 
             torpilleTexture = Content.Load<Texture2D>("torpedo_black_revert");
             background = Content.Load<Texture2D>("background");
-            ballTexture = Content.Load<Texture2D>("plane");
+            avionTexture = Content.Load<Texture2D>("plane");
             // TODO: use this.Content to load your game content here
         }
 
@@ -64,35 +78,47 @@ namespace PlaneGAME
 
             if (!pause)
             {
+                if (avionHitbox.Intersects(torpilleHitbox) || avionHitbox.Intersects(torpilleHitbox2) || avionHitbox.Intersects(torpilleHitbox3))
+                {
+                    pause = true;
+                }
+
                 if (kstate.IsKeyDown(Keys.Up))
-                    ballPosition.Y -= ballSpeed * (float)gameTime.ElapsedGameTime.TotalSeconds;
+                    avionPosition.Y -= speed * (float)gameTime.ElapsedGameTime.TotalSeconds;
 
                 if (kstate.IsKeyDown(Keys.Down))
-                    ballPosition.Y += ballSpeed * (float)gameTime.ElapsedGameTime.TotalSeconds;
+                    avionPosition.Y += speed * (float)gameTime.ElapsedGameTime.TotalSeconds;
 
                 if (kstate.IsKeyDown(Keys.Left))
                 {
-                    ballPosition.X -= ballSpeed * (float)gameTime.ElapsedGameTime.TotalSeconds;
-                    ballTexture = Content.Load<Texture2D>("plane_revert");
+                    avionPosition.X -= speed * (float)gameTime.ElapsedGameTime.TotalSeconds;
+                    avionTexture = Content.Load<Texture2D>("plane_revert");
                 }
 
                 if (kstate.IsKeyDown(Keys.Right))
                 {
-                    ballPosition.X += ballSpeed * (float)gameTime.ElapsedGameTime.TotalSeconds;
-                    ballTexture = Content.Load<Texture2D>("plane");
+                    avionPosition.X += speed * (float)gameTime.ElapsedGameTime.TotalSeconds;
+                    avionTexture = Content.Load<Texture2D>("plane");
                 }
 
-                if (ballPosition.X > _graphics.PreferredBackBufferWidth - ballTexture.Width / 5)
-                    ballPosition.X = _graphics.PreferredBackBufferWidth - ballTexture.Width / 5;
-                else if (ballPosition.X < ballTexture.Width / 5)
-                    ballPosition.X = ballTexture.Width / 5;
+                if (avionPosition.X > _graphics.PreferredBackBufferWidth - avionTexture.Width / 5)
+                    avionPosition.X = _graphics.PreferredBackBufferWidth - avionTexture.Width / 5;
+                else if (avionPosition.X < avionTexture.Width / 5)
+                    avionPosition.X = avionTexture.Width / 5;
 
-                if (ballPosition.Y > _graphics.PreferredBackBufferHeight - ballTexture.Height / 5)
-                    ballPosition.Y = _graphics.PreferredBackBufferHeight - ballTexture.Height / 5;
-                else if (ballPosition.Y < ballTexture.Height / 5)
-                    ballPosition.Y = ballTexture.Height / 5;
+                if (avionPosition.Y > _graphics.PreferredBackBufferHeight - avionTexture.Height / 5)
+                    avionPosition.Y = _graphics.PreferredBackBufferHeight - avionTexture.Height / 5;
+                else if (avionPosition.Y < avionTexture.Height / 5)
+                    avionPosition.Y = avionTexture.Height / 5;
 
                 torpillePosition = torpille.Update(gameTime);
+                torpillePosition2 = torpille2.Update(gameTime);
+                torpillePosition3 = torpille3.Update(gameTime);
+
+                avionHitbox = new Rectangle((int)avionPosition.X - avionTexture.Width/4, (int)avionPosition.Y - avionTexture.Height/4, avionTexture.Width/3 ,avionTexture.Height/3);
+                torpilleHitbox = new Rectangle((int)torpillePosition.X - torpilleTexture.Width/4, (int)torpillePosition.Y - torpilleTexture.Height/4, torpilleTexture.Width/3, torpilleTexture.Height/3);
+                torpilleHitbox2 = new Rectangle((int)torpillePosition2.X - torpilleTexture.Width / 4, (int)torpillePosition2.Y - torpilleTexture.Height / 4, torpilleTexture.Width / 3, torpilleTexture.Height / 3);
+                torpilleHitbox3 = new Rectangle((int)torpillePosition3.X - torpilleTexture.Width / 4, (int)torpillePosition3.Y - torpilleTexture.Height / 4, torpilleTexture.Width / 3, torpilleTexture.Height / 3);
             }
             base.Update(gameTime);
         }
@@ -105,12 +131,12 @@ namespace PlaneGAME
             _spriteBatch.Begin();
             _spriteBatch.Draw(background, new Rectangle(0, 0, 1920, 1080), Color.White);
             _spriteBatch.Draw(
-                ballTexture,
-                ballPosition,
+                avionTexture,
+                avionPosition,
                 null,
                 Color.White,
                 0f,
-                new Vector2(ballTexture.Width / 2, ballTexture.Height / 2),
+                new Vector2(avionTexture.Width / 2, avionTexture.Height / 2),
                 new Vector2((float)0.5, (float)0.5),
                 SpriteEffects.None,
                 0f
@@ -118,6 +144,28 @@ namespace PlaneGAME
             _spriteBatch.Draw(
                 torpilleTexture,
                 torpillePosition,
+                null,
+                Color.White,
+                0f,
+                new Vector2(torpilleTexture.Width / 2, torpilleTexture.Height / 2),
+                new Vector2((float)0.5, (float)0.5),
+                SpriteEffects.None,
+                0f
+            );
+            _spriteBatch.Draw(
+                torpilleTexture,
+                torpillePosition2,
+                null,
+                Color.White,
+                0f,
+                new Vector2(torpilleTexture.Width / 2, torpilleTexture.Height / 2),
+                new Vector2((float)0.5, (float)0.5),
+                SpriteEffects.None,
+                0f
+            );
+            _spriteBatch.Draw(
+                torpilleTexture,
+                torpillePosition3,
                 null,
                 Color.White,
                 0f,

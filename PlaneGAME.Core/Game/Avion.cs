@@ -13,29 +13,11 @@ namespace PlaneGAME.Core.Game
 
         public Avion()
         {
-            avionPosition.Y = 500;
-            avionPosition.X = 2000;
+            avionPosition.Y = 540;
+            avionPosition.X = 960;
         }
 
-        public Vector2 Update(GameTime gameTime)
-        {
-            Random rand = new Random();
-            avionPosition.X -= speed * (float)gameTime.ElapsedGameTime.TotalSeconds;
-
-            if (torpillePosition.X <= -100)
-            {
-                torpillePosition.X = 2000;
-                torpillePosition.Y = rand.Next(50, 1030);
-            }
-
-            if (speed < 2000f)
-            {
-                speed += 1f;
-            }
-            return torpillePosition;
-
-            // if collision blablabla
-        }
     }
 }
+
 
