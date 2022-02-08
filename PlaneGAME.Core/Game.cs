@@ -2,6 +2,7 @@ using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
 using PlaneGAME.Core.Game;
+using System;
 
 namespace PlaneGAME
 {
@@ -12,6 +13,8 @@ namespace PlaneGAME
         Texture2D ballTexture;
         Texture2D torpilleTexture;
         Texture2D background;
+        Torpille torpille;
+        Vector2 torpillePosition = Vector2.Zero;
         Vector2 ballPosition;
         float ballSpeed;
         bool pause = false;
@@ -31,8 +34,9 @@ namespace PlaneGAME
             // TODO: Add your initialization logic here
             ballPosition = new Vector2(_graphics.PreferredBackBufferWidth / 2,
             _graphics.PreferredBackBufferHeight / 2);
-            Torpille torpille = new Torpille();
-            ballSpeed = 500f;
+            torpille = new Torpille();
+            torpillePosition = new Vector2(torpille.torpillePosition.X, torpille.torpillePosition.Y);
+            ballSpeed = 1000f;
             base.Initialize();
         }
 
@@ -87,8 +91,9 @@ namespace PlaneGAME
                     ballPosition.Y = _graphics.PreferredBackBufferHeight - ballTexture.Height / 5;
                 else if (ballPosition.Y < ballTexture.Height / 5)
                     ballPosition.Y = ballTexture.Height / 5;
-            }
 
+                torpillePosition = torpille.Update(gameTime);
+            }
             base.Update(gameTime);
         }
 
@@ -111,12 +116,12 @@ namespace PlaneGAME
                 0f
             );
             _spriteBatch.Draw(
-                ballTexture,
-                ballPosition,
+                torpilleTexture,
+                torpillePosition,
                 null,
                 Color.White,
                 0f,
-                new Vector2(ballTexture.Width / 2, ballTexture.Height / 2),
+                new Vector2(torpilleTexture.Width / 2, torpilleTexture.Height / 2),
                 new Vector2((float)0.5, (float)0.5),
                 SpriteEffects.None,
                 0f

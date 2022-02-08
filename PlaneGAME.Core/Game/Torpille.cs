@@ -7,19 +7,33 @@ using System.Text;
 
 namespace PlaneGAME.Core.Game
 {
-    class Torpille
+    public class Torpille
     {
-        Vector2 torpillePosition;
+        public Vector2 torpillePosition;
         float speed;
 
         public Torpille()
         {
-
+            torpillePosition.Y = 500;
+            torpillePosition.X = 2000;
+            speed = 500f;
         }
 
-        protected void Update(GameTime gameTime)
+        public Vector2 Update(GameTime gameTime)
         {
+            Random rand = new Random();
             torpillePosition.X -= speed * (float)gameTime.ElapsedGameTime.TotalSeconds;
+
+            if (torpillePosition.X <= -100){
+                torpillePosition.X = 2000;
+                torpillePosition.Y = rand.Next(50, 1030);
+            }
+
+            if(speed < 2000f)
+            {
+                speed += 1f;
+            }
+            return torpillePosition;
 
             // if collision blablabla
         }
