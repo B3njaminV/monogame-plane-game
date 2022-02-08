@@ -27,6 +27,10 @@ namespace PlaneGAME
         Vector2 torpillePosition3 = Vector2.Zero;
         Rectangle torpilleHitbox3;
         bool pause = false;
+        bool dead = false;
+        int score = 0;
+        int highScore = 0;
+        SpriteFont scoreFont;
 
         public PlaneGAMEGame()
         {
@@ -61,6 +65,7 @@ namespace PlaneGAME
             torpilleTexture = Content.Load<Texture2D>("torpedo_black_revert");
             background = Content.Load<Texture2D>("background");
             avionTexture = Content.Load<Texture2D>("plane");
+            scoreFont = Content.Load<SpriteFont>("score");
             // TODO: use this.Content to load your game content here
         }
 
@@ -76,11 +81,30 @@ namespace PlaneGAME
                 pause = !pause;
             }
 
+            if (dead)
+            {
+                if (kstate.IsKeyDown(Keys.R))
+                {
+                    score = 0;
+                    Initialize();
+                    ResetElapsedTime();
+                    dead = false;
+                    pause = false;
+                }
+            }
+
             if (!pause)
             {
+                score += 1;
+
                 if (avionHitbox.Intersects(torpilleHitbox) || avionHitbox.Intersects(torpilleHitbox2) || avionHitbox.Intersects(torpilleHitbox3))
                 {
+                    dead = true;
                     pause = true;
+                    if (score > highScore)
+                    {
+                        highScore = score;
+                    }
                 }
 
                 if (kstate.IsKeyDown(Keys.Up))
@@ -128,54 +152,69 @@ namespace PlaneGAME
             GraphicsDevice.Clear(Color.CornflowerBlue);
 
             // TODO: Add your drawing code here
-            _spriteBatch.Begin();
-            _spriteBatch.Draw(background, new Rectangle(0, 0, 1920, 1080), Color.White);
-            _spriteBatch.Draw(
-                avionTexture,
-                avionPosition,
-                null,
-                Color.White,
-                0f,
-                new Vector2(avionTexture.Width / 2, avionTexture.Height / 2),
-                new Vector2((float)0.5, (float)0.5),
-                SpriteEffects.None,
-                0f
-            );
-            _spriteBatch.Draw(
-                torpilleTexture,
-                torpillePosition,
-                null,
-                Color.White,
-                0f,
-                new Vector2(torpilleTexture.Width / 2, torpilleTexture.Height / 2),
-                new Vector2((float)0.5, (float)0.5),
-                SpriteEffects.None,
-                0f
-            );
-            _spriteBatch.Draw(
-                torpilleTexture,
-                torpillePosition2,
-                null,
-                Color.White,
-                0f,
-                new Vector2(torpilleTexture.Width / 2, torpilleTexture.Height / 2),
-                new Vector2((float)0.5, (float)0.5),
-                SpriteEffects.None,
-                0f
-            );
-            _spriteBatch.Draw(
-                torpilleTexture,
-                torpillePosition3,
-                null,
-                Color.White,
-                0f,
-                new Vector2(torpilleTexture.Width / 2, torpilleTexture.Height / 2),
-                new Vector2((float)0.5, (float)0.5),
-                SpriteEffects.None,
-                0f
-            );
-            _spriteBatch.End();
+            if (!dead)
+            {
+                _spriteBatch.Begin();
+                _spriteBatch.Draw(background, new Rectangle(0, 0, 1920, 1080), Color.White);
+                _spriteBatch.Draw(
+                    avionTexture,
+                    avionPosition,
+                    null,
+                    Color.White,
+                    0f,
+                    new Vector2(avionTexture.Width / 2, avionTexture.Height / 2),
+                    new Vector2((float)0.5, (float)0.5),
+                    SpriteEffects.None,
+                    0f
+                );
+                _spriteBatch.Draw(
+                    torpilleTexture,
+                    torpillePosition,
+                    null,
+                    Color.White,
+                    0f,
+                    new Vector2(torpilleTexture.Width / 2, torpilleTexture.Height / 2),
+                    new Vector2((float)0.5, (float)0.5),
+                    SpriteEffects.None,
+                    0f
+                );
+                _spriteBatch.Draw(
+                    torpilleTexture,
+                    torpillePosition2,
+                    null,
+                    Color.White,
+                    0f,
+                    new Vector2(torpilleTexture.Width / 2, torpilleTexture.Height / 2),
+                    new Vector2((float)0.5, (float)0.5),
+                    SpriteEffects.None,
+                    0f
+                );
+                _spriteBatch.Draw(
+                    torpilleTexture,
+                    torpillePosition3,
+                    null,
+                    Color.White,
+                    0f,
+                    new Vector2(torpilleTexture.Width / 2, torpilleTexture.Height / 2),
+                    new Vector2((float)0.5, (float)0.5),
+                    SpriteEffects.None,
+                    0f
+                );
+                _spriteBatch.DrawString(scoreFont, "Score : " + score.ToString(), new Vector2(20, 05), Color.Red);
+                _spriteBatch.DrawString(scoreFont, "HighScore : " + highScore.ToString(), new Vector2(20, 85), Color.Red);
+                _spriteBatch.End();
+            }
+            else if (dead)
+            {
+                _spriteBatch.Begin();
 
+                _spriteBatch.Draw(background, new Rectangle(0, 0, 1920, 1080), Color.DarkGray);
+                _spriteBatch.DrawString(scoreFont, "HighScore : " + highScore.ToString(), new Vector2(860, 580), Color.Red);
+                _spriteBatch.DrawString(scoreFont, "Score : " + score.ToString(), new Vector2(900,500), Color.Red);
+                _spriteBatch.DrawString(scoreFont, "Perdu !", new Vector2(925, 430), Color.Red);
+
+                _spriteBatch.End();
+            }
             base.Draw(gameTime);
         }
     }
