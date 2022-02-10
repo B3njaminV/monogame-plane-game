@@ -38,7 +38,7 @@ namespace PlaneGAME
 
             _graphics.PreferredBackBufferWidth = 1920;
             _graphics.PreferredBackBufferHeight = 1080;
-            //_graphics.IsFullScreen = true;
+            _graphics.IsFullScreen = true;
             Content.RootDirectory = "Content";
             IsMouseVisible = false;
         }
@@ -51,9 +51,9 @@ namespace PlaneGAME
             speed = 1000f;
             torpille = new Torpille(2000);
             torpillePosition = new Vector2(torpille.torpillePosition.X, torpille.torpillePosition.Y);
-            torpille2 = new Torpille(2500);
+            torpille2 = new Torpille(2640);
             torpillePosition2 = new Vector2(torpille2.torpillePosition.X, torpille2.torpillePosition.Y);
-            torpille3 = new Torpille(3000);
+            torpille3 = new Torpille(3280);
             torpillePosition3 = new Vector2(torpille3.torpillePosition.X, torpille3.torpillePosition.Y);
             base.Initialize();
         }
@@ -139,10 +139,10 @@ namespace PlaneGAME
                 torpillePosition2 = torpille2.Update(gameTime);
                 torpillePosition3 = torpille3.Update(gameTime);
 
-                avionHitbox = new Rectangle((int)avionPosition.X - avionTexture.Width/4, (int)avionPosition.Y - avionTexture.Height/4, avionTexture.Width/3 ,avionTexture.Height/3);
-                torpilleHitbox = new Rectangle((int)torpillePosition.X - torpilleTexture.Width/4, (int)torpillePosition.Y - torpilleTexture.Height/4, torpilleTexture.Width/3, torpilleTexture.Height/3);
-                torpilleHitbox2 = new Rectangle((int)torpillePosition2.X - torpilleTexture.Width / 4, (int)torpillePosition2.Y - torpilleTexture.Height / 4, torpilleTexture.Width / 3, torpilleTexture.Height / 3);
-                torpilleHitbox3 = new Rectangle((int)torpillePosition3.X - torpilleTexture.Width / 4, (int)torpillePosition3.Y - torpilleTexture.Height / 4, torpilleTexture.Width / 3, torpilleTexture.Height / 3);
+                avionHitbox = new Rectangle((int)avionPosition.X - avionTexture.Width/4, (int)avionPosition.Y - avionTexture.Height/4, avionTexture.Width/3 ,avionTexture.Height/3 + avionTexture.Height/8);
+                torpilleHitbox = new Rectangle((int)torpillePosition.X - torpilleTexture.Width/4, (int)torpillePosition.Y - torpilleTexture.Height/4, torpilleTexture.Width/3, torpilleTexture.Height/3 + torpilleTexture.Height/8);
+                torpilleHitbox2 = new Rectangle((int)torpillePosition2.X - torpilleTexture.Width / 4, (int)torpillePosition2.Y - torpilleTexture.Height / 4, torpilleTexture.Width / 3, torpilleTexture.Height/3 + torpilleTexture.Height / 8);
+                torpilleHitbox3 = new Rectangle((int)torpillePosition3.X - torpilleTexture.Width / 4, (int)torpillePosition3.Y - torpilleTexture.Height / 4, torpilleTexture.Width / 3, torpilleTexture.Height/3 + torpilleTexture.Height / 8);
             }
             base.Update(gameTime);
         }
