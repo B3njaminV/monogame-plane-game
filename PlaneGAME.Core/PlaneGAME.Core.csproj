@@ -9,21 +9,10 @@
   </ItemGroup>
   <ItemGroup>
     <None Remove="Content\PlaneGAME.mgcb" />
-    <None Remove="MyoSharp\x64\myo.dll" />
-    <None Remove="MyoSharp\x86\myo.dll" />
   </ItemGroup>
   <ItemGroup>
     <PackageReference Include="MonoGame.Framework.DesktopGL" Version="3.8.0.1641">
       <PrivateAssets>All</PrivateAssets>
     </PackageReference>
-  </ItemGroup>
-  <ItemGroup>
-    <Resource Include="MyoSharp\x64\myo.dll" />
-    <Resource Include="MyoSharp\x86\myo.dll" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Update="MyoSharp\packages.config">
-      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
-    </None>
   </ItemGroup>
 </Project>
