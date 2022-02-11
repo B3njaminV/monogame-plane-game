@@ -139,10 +139,10 @@ namespace PlaneGAME
                 torpillePosition2 = torpille2.Update(gameTime);
                 torpillePosition3 = torpille3.Update(gameTime);
 
-                avionHitbox = new Rectangle((int)avionPosition.X - avionTexture.Width/4, (int)avionPosition.Y - avionTexture.Height/4, avionTexture.Width/3 ,avionTexture.Height/3 + avionTexture.Height/8);
-                torpilleHitbox = new Rectangle((int)torpillePosition.X - torpilleTexture.Width/4, (int)torpillePosition.Y - torpilleTexture.Height/4, torpilleTexture.Width/3, torpilleTexture.Height/3 + torpilleTexture.Height/8);
-                torpilleHitbox2 = new Rectangle((int)torpillePosition2.X - torpilleTexture.Width / 4, (int)torpillePosition2.Y - torpilleTexture.Height / 4, torpilleTexture.Width / 3, torpilleTexture.Height/3 + torpilleTexture.Height / 8);
-                torpilleHitbox3 = new Rectangle((int)torpillePosition3.X - torpilleTexture.Width / 4, (int)torpillePosition3.Y - torpilleTexture.Height / 4, torpilleTexture.Width / 3, torpilleTexture.Height/3 + torpilleTexture.Height / 8);
+                avionHitbox = new Rectangle((int)avionPosition.X - avionTexture.Width/4, (int)avionPosition.Y - avionTexture.Height/4, avionTexture.Width/3 + avionTexture.Width/7,avionTexture.Height/3 + avionTexture.Height/8);
+                torpilleHitbox = new Rectangle((int)torpillePosition.X - torpilleTexture.Width/4, (int)torpillePosition.Y - torpilleTexture.Height/4, torpilleTexture.Width/3 + torpilleTexture.Width/7, torpilleTexture.Height/3 + torpilleTexture.Height/8);
+                torpilleHitbox2 = new Rectangle((int)torpillePosition2.X - torpilleTexture.Width / 4, (int)torpillePosition2.Y - torpilleTexture.Height / 4, torpilleTexture.Width / 3 + torpilleTexture.Width / 7, torpilleTexture.Height/3 + torpilleTexture.Height / 8);
+                torpilleHitbox3 = new Rectangle((int)torpillePosition3.X - torpilleTexture.Width / 4, (int)torpillePosition3.Y - torpilleTexture.Height / 4, torpilleTexture.Width / 3 + torpilleTexture.Width / 7, torpilleTexture.Height/3 + torpilleTexture.Height / 8);
             }
             base.Update(gameTime);
         }
@@ -156,6 +156,10 @@ namespace PlaneGAME
             {
                 _spriteBatch.Begin();
                 _spriteBatch.Draw(background, new Rectangle(0, 0, 1920, 1080), Color.White);
+                _spriteBatch.Draw(background, torpilleHitbox, Color.Red);
+                _spriteBatch.Draw(background, torpilleHitbox2, Color.Red);
+                _spriteBatch.Draw(background, torpilleHitbox3, Color.Red);
+                _spriteBatch.Draw(background, avionHitbox, Color.Blue);
                 _spriteBatch.Draw(
                     avionTexture,
                     avionPosition,
@@ -209,9 +213,9 @@ namespace PlaneGAME
                 _spriteBatch.Begin();
 
                 _spriteBatch.Draw(background, new Rectangle(0, 0, 1920, 1080), Color.DarkGray);
-                _spriteBatch.DrawString(scoreFont, "HighScore : " + highScore.ToString(), new Vector2(860, 580), Color.Red);
-                _spriteBatch.DrawString(scoreFont, "Score : " + score.ToString(), new Vector2(900,500), Color.Red);
-                _spriteBatch.DrawString(scoreFont, "Perdu !", new Vector2(925, 430), Color.Red);
+                _spriteBatch.DrawString(scoreFont, "HighScore : " + highScore.ToString(), new Vector2(660, 480), Color.Red);
+                _spriteBatch.DrawString(scoreFont, "Score : " + score.ToString(), new Vector2(700,400), Color.Red);
+                _spriteBatch.DrawString(scoreFont, "Perdu !", new Vector2(725, 330), Color.Red);
 
                 _spriteBatch.End();
             }
