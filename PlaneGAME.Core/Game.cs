@@ -2,9 +2,9 @@ using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
 using PlaneGAME.Core.Game;
-//using MyoLib;
-//using MyoSharp;
-//using MyoSharp.Poses;
+using MyoLib;
+using MyoSharp;
+using MyoSharp.Poses;
 using static System.Console;
 using System;
 using System.Collections.Generic;
@@ -38,7 +38,7 @@ namespace PlaneGAME
         int score = 0;
         int highScore = 0;
         SpriteFont scoreFont;
-        //static MyoManager mgr;
+        static MyoManager mgr;
 
         public PlaneGAMEGame()
         {
@@ -63,18 +63,18 @@ namespace PlaneGAME
             torpillePosition2 = new Vector2(torpille2.torpillePosition.X, torpille2.torpillePosition.Y);
             torpille3 = new Torpille(3280);
             torpillePosition3 = new Vector2(torpille3.torpillePosition.X, torpille3.torpillePosition.Y);
-            //mgr = new MyoManager();
+            mgr = new MyoManager();
 
-            //mgr.Init();
+            mgr.Init();
             //mgr.MyoConnected += Mgr_MyoConnected;
             //mgr.MyoLocked += Mgr_MyoLocked;
             //mgr.MyoUnlocked += Mgr_MyoUnlocked;
             //mgr.PoseChanged += Mgr_PoseChanged;
             //mgr.HeldPoseTriggered += Mgr_HeldPoseTriggered;
             //mgr.PoseSequenceCompleted += Mgr_PoseSequenceCompleted;
-            //mgr.MyoConnected += Mgr_MyoConnected1;
-            //mgr.StartListening();
-            //ReadKey();
+            mgr.MyoConnected += Mgr_MyoConnected1;
+            mgr.StartListening();
+            ReadKey();
             base.Initialize();
         }
 
@@ -238,7 +238,7 @@ namespace PlaneGAME
             base.Draw(gameTime);
         }
 
-       /* private static void Mgr_MyoConnected1(object sender, MyoSharp.Device.MyoEventArgs e)
+        private static void Mgr_MyoConnected1(object sender, MyoSharp.Device.MyoEventArgs e)
         {
             //mgr.SubscribeToOrientationData(0, (source, args) => WriteLine($"{args.Yaw:0.00} ; {args.Pitch:0.00} ; {args.Roll:0.00}"));
             //mgr.SubscribeToGyroscopeData(0, (source, args) => WriteLine($"{args.Gyroscope.X:00.00} ; {args.Gyroscope.Y:00.00} ; {args.Gyroscope.Z:00.00}"));
@@ -299,7 +299,7 @@ namespace PlaneGAME
             await Task.Delay(10000);
             WriteLine("Pose Sequence");
             mgr.AddPoseSequence(mgr.Myos.First(), Pose.Fist, Pose.FingersSpread);
-        }*/
+        }
 
     }
 }
