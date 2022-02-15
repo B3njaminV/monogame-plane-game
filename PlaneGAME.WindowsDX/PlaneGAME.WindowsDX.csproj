@@ -23,8 +23,6 @@
     <PackageReference Include="MonoGame.Content.Builder.Task" Version="3.8.0.1641" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\myo\MyoLib\MyoLib.csproj" />
-    <ProjectReference Include="..\myo\MyoSharp\MyoSharp.csproj" />
     <ProjectReference Include="..\PlaneGAME.Core\PlaneGAME.Core.csproj" />
   </ItemGroup>
 </Project>

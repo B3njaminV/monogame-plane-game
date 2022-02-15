@@ -15,8 +15,4 @@
       <PrivateAssets>All</PrivateAssets>
     </PackageReference>
   </ItemGroup>
-  <ItemGroup>
-    <ProjectReference Include="..\myo\MyoLib\MyoLib.csproj" />
-    <ProjectReference Include="..\myo\MyoSharp\MyoSharp.csproj" />
-  </ItemGroup>
 </Project>
