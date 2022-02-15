@@ -33,17 +33,22 @@ namespace PlaneGAME
         Torpille torpille3;
         Vector2 torpillePosition3 = Vector2.Zero;
         Rectangle torpilleHitbox3;
+        Torpille torpille4;
+        Vector2 torpillePosition4 = Vector2.Zero;
+        Rectangle torpilleHitbox4;
+        Difficulte difficulte = Difficulte.Facile;
+        //MyoSharp.Device.PoseEventArgs currentPos;
         bool pause = false;
         bool dead = false;
         int score = 0;
         int highScore = 0;
         SpriteFont scoreFont;
         static MyoManager mgr;
+        MyoSharp.Device.MyoEventArgs e;
 
         public PlaneGAMEGame()
         {
             _graphics = new GraphicsDeviceManager(this);
-
             _graphics.PreferredBackBufferWidth = 1920;
             _graphics.PreferredBackBufferHeight = 1080;
             _graphics.IsFullScreen = true;
@@ -53,18 +58,26 @@ namespace PlaneGAME
 
         protected override void Initialize()
         {
-            // TODO: Add your initialization logic here
             avion = new Avion();
             avionPosition = new Vector2(avion.avionPosition.X,avion.avionPosition.Y);
             speed = 1000f;
+
             torpille = new Torpille(2000);
             torpillePosition = new Vector2(torpille.torpillePosition.X, torpille.torpillePosition.Y);
-            torpille2 = new Torpille(2640);
+            torpille2 = new Torpille(2800);
             torpillePosition2 = new Vector2(torpille2.torpillePosition.X, torpille2.torpillePosition.Y);
-            torpille3 = new Torpille(3280);
-            torpillePosition3 = new Vector2(torpille3.torpillePosition.X, torpille3.torpillePosition.Y);
-            mgr = new MyoManager();
+            if(difficulte != Difficulte.Facile)
+            {
+                torpille3 = new Torpille(2400);
+                torpillePosition3 = new Vector2(torpille3.torpillePosition.X, torpille3.torpillePosition.Y);
+                if (difficulte!= Difficulte.Moyen)
+                {
+                    torpille4 = new Torpille(3200);
+                    torpillePosition4 = new Vector2(torpille4.torpillePosition.X, torpille4.torpillePosition.Y);
+                }
+            }
 
+            mgr = new MyoManager();
             mgr.Init();
             //mgr.MyoConnected += Mgr_MyoConnected;
             //mgr.MyoLocked += Mgr_MyoLocked;
@@ -72,21 +85,20 @@ namespace PlaneGAME
             //mgr.PoseChanged += Mgr_PoseChanged;
             //mgr.HeldPoseTriggered += Mgr_HeldPoseTriggered;
             //mgr.PoseSequenceCompleted += Mgr_PoseSequenceCompleted;
-            mgr.MyoConnected += Mgr_MyoConnected1;
-            mgr.StartListening();
-            ReadKey();
+            //mgr.MyoConnected += Mgr_MyoConnected1;
+            //mgr.StartListening();
+            //ReadKey();
+
             base.Initialize();
         }
 
         protected override void LoadContent()
         {
             _spriteBatch = new SpriteBatch(GraphicsDevice);
-
             torpilleTexture = Content.Load<Texture2D>("torpedo_black_revert");
             background = Content.Load<Texture2D>("background");
             avionTexture = Content.Load<Texture2D>("plane");
             scoreFont = Content.Load<SpriteFont>("score");
-            // TODO: use this.Content to load your game content here
         }
 
         protected override void Update(GameTime gameTime)
@@ -103,13 +115,25 @@ namespace PlaneGAME
 
             if (dead)
             {
+                if (kstate.IsKeyDown(Keys.A))
+                {
+                    difficulte = Difficulte.Facile;
+                }
+                if (kstate.IsKeyDown(Keys.Z))
+                {
+                    difficulte = Difficulte.Moyen;
+                }
+                if (kstate.IsKeyDown(Keys.E))
+                {
+                    difficulte = Difficulte.Difficile;
+                }
                 if (kstate.IsKeyDown(Keys.R))
                 {
                     score = 0;
-                    Initialize();
-                    ResetElapsedTime();
                     dead = false;
                     pause = false;
+                    Initialize();
+                    ResetElapsedTime();
                 }
             }
 
@@ -117,7 +141,7 @@ namespace PlaneGAME
             {
                 score += 1;
 
-                if (avionHitbox.Intersects(torpilleHitbox) || avionHitbox.Intersects(torpilleHitbox2) || avionHitbox.Intersects(torpilleHitbox3))
+                if (avionHitbox.Intersects(torpilleHitbox) || avionHitbox.Intersects(torpilleHitbox2) || avionHitbox.Intersects(torpilleHitbox3) || avionHitbox.Intersects(torpilleHitbox4))
                 {
                     dead = true;
                     pause = true;
@@ -127,19 +151,20 @@ namespace PlaneGAME
                     }
                 }
 
+
                 if (kstate.IsKeyDown(Keys.Up))
                     avionPosition.Y -= speed * (float)gameTime.ElapsedGameTime.TotalSeconds;
 
                 if (kstate.IsKeyDown(Keys.Down))
                     avionPosition.Y += speed * (float)gameTime.ElapsedGameTime.TotalSeconds;
 
-                if (kstate.IsKeyDown(Keys.Left))
+                if (kstate.IsKeyDown(Keys.Left)/* || currentPos.Pose == Pose.WaveIn*/)
                 {
                     avionPosition.X -= speed * (float)gameTime.ElapsedGameTime.TotalSeconds;
                     avionTexture = Content.Load<Texture2D>("plane_revert");
                 }
 
-                if (kstate.IsKeyDown(Keys.Right))
+                if (kstate.IsKeyDown(Keys.Right)/* || currentPos.Pose == Pose.WaveOut*/)
                 {
                     avionPosition.X += speed * (float)gameTime.ElapsedGameTime.TotalSeconds;
                     avionTexture = Content.Load<Texture2D>("plane");
@@ -157,24 +182,37 @@ namespace PlaneGAME
 
                 torpillePosition = torpille.Update(gameTime);
                 torpillePosition2 = torpille2.Update(gameTime);
-                torpillePosition3 = torpille3.Update(gameTime);
+                if (difficulte != Difficulte.Facile)
+                {
+                    torpillePosition3 = torpille3.Update(gameTime);
+                    if(difficulte != Difficulte.Moyen)
+                    {
+                        torpillePosition4 = torpille4.Update(gameTime);
+                    }
+                }
 
                 avionHitbox = new Rectangle((int)avionPosition.X - avionTexture.Width/4, (int)avionPosition.Y - avionTexture.Height/4, avionTexture.Width/3 + avionTexture.Width/7,avionTexture.Height/3 + avionTexture.Height/8);
                 torpilleHitbox = new Rectangle((int)torpillePosition.X - torpilleTexture.Width/4, (int)torpillePosition.Y - torpilleTexture.Height/4, torpilleTexture.Width/3 + torpilleTexture.Width/7, torpilleTexture.Height/3 + torpilleTexture.Height/8);
-                torpilleHitbox2 = new Rectangle((int)torpillePosition2.X - torpilleTexture.Width / 4, (int)torpillePosition2.Y - torpilleTexture.Height / 4, torpilleTexture.Width / 3 + torpilleTexture.Width / 7, torpilleTexture.Height/3 + torpilleTexture.Height / 8);
-                torpilleHitbox3 = new Rectangle((int)torpillePosition3.X - torpilleTexture.Width / 4, (int)torpillePosition3.Y - torpilleTexture.Height / 4, torpilleTexture.Width / 3 + torpilleTexture.Width / 7, torpilleTexture.Height/3 + torpilleTexture.Height / 8);
+                torpilleHitbox2 = new Rectangle((int)torpillePosition2.X - torpilleTexture.Width / 4, (int)torpillePosition2.Y - torpilleTexture.Height / 4, torpilleTexture.Width / 3 + torpilleTexture.Width / 7, torpilleTexture.Height / 3 + torpilleTexture.Height / 8);
+                torpilleHitbox3 = new Rectangle(-500, -500, 0, 0);
+                torpilleHitbox4 = new Rectangle(-500, -500, 0, 0);
+                if (difficulte != Difficulte.Facile)
+                {
+                    torpilleHitbox3 = new Rectangle((int)torpillePosition3.X - torpilleTexture.Width / 4, (int)torpillePosition3.Y - torpilleTexture.Height / 4, torpilleTexture.Width / 3 + torpilleTexture.Width / 7, torpilleTexture.Height / 3 + torpilleTexture.Height / 8);
+                    if (difficulte != Difficulte.Moyen)
+                    {
+                        torpilleHitbox4 = new Rectangle((int)torpillePosition4.X - torpilleTexture.Width / 4, (int)torpillePosition4.Y - torpilleTexture.Height / 4, torpilleTexture.Width / 3 + torpilleTexture.Width / 7, torpilleTexture.Height / 3 + torpilleTexture.Height / 8);
+                    }
+                }
             }
             base.Update(gameTime);
         }
 
         protected override void Draw(GameTime gameTime)
         {
-            GraphicsDevice.Clear(Color.CornflowerBlue);
-
-            // TODO: Add your drawing code here
+            _spriteBatch.Begin();
             if (!dead)
             {
-                _spriteBatch.Begin();
                 _spriteBatch.Draw(background, new Rectangle(0, 0, 1920, 1080), Color.White);
                 _spriteBatch.Draw(
                     avionTexture,
@@ -209,7 +247,9 @@ namespace PlaneGAME
                     SpriteEffects.None,
                     0f
                 );
-                _spriteBatch.Draw(
+                if(difficulte != Difficulte.Facile)
+                {
+                    _spriteBatch.Draw(
                     torpilleTexture,
                     torpillePosition3,
                     null,
@@ -219,29 +259,44 @@ namespace PlaneGAME
                     new Vector2((float)0.5, (float)0.5),
                     SpriteEffects.None,
                     0f
+                    );
+                    if(difficulte != Difficulte.Moyen)
+                    {
+                        _spriteBatch.Draw(
+                    torpilleTexture,
+                    torpillePosition4,
+                    null,
+                    Color.White,
+                    0f,
+                    new Vector2(torpilleTexture.Width / 2, torpilleTexture.Height / 2),
+                    new Vector2((float)0.5, (float)0.5),
+                    SpriteEffects.None,
+                    0f
                 );
+                    }
+                }
                 _spriteBatch.DrawString(scoreFont, "Score : " + score.ToString(), new Vector2(20, 05), Color.Red);
                 _spriteBatch.DrawString(scoreFont, "HighScore : " + highScore.ToString(), new Vector2(20, 85), Color.Red);
-                _spriteBatch.End();
+                _spriteBatch.DrawString(scoreFont, "Difficulte : " + difficulte.ToString(), new Vector2(420, 05), Color.Red);
             }
             else if (dead)
             {
-                _spriteBatch.Begin();
-
                 _spriteBatch.Draw(background, new Rectangle(0, 0, 1920, 1080), Color.DarkGray);
                 _spriteBatch.DrawString(scoreFont, "HighScore : " + highScore.ToString(), new Vector2(660, 480), Color.Red);
                 _spriteBatch.DrawString(scoreFont, "Score : " + score.ToString(), new Vector2(700,400), Color.Red);
                 _spriteBatch.DrawString(scoreFont, "Perdu !", new Vector2(725, 330), Color.Red);
-
-                _spriteBatch.End();
+                _spriteBatch.DrawString(scoreFont, "A: Facile   Z: Moyen   E: Difficile", new Vector2(500, 05), Color.Red);
+                _spriteBatch.DrawString(scoreFont, "Difficulte : " + difficulte.ToString(), new Vector2(630, 85), Color.Red);
+                _spriteBatch.DrawString(scoreFont, "R: Restart", new Vector2(700, 550), Color.Red);
             }
+            _spriteBatch.End();
             base.Draw(gameTime);
         }
 
         private static void Mgr_MyoConnected1(object sender, MyoSharp.Device.MyoEventArgs e)
         {
             //mgr.SubscribeToOrientationData(0, (source, args) => WriteLine($"{args.Yaw:0.00} ; {args.Pitch:0.00} ; {args.Roll:0.00}"));
-            //mgr.SubscribeToGyroscopeData(0, (source, args) => WriteLine($"{args.Gyroscope.X:00.00} ; {args.Gyroscope.Y:00.00} ; {args.Gyroscope.Z:00.00}"));
+            
             mgr.SubscribeToAccelerometerData(0, (source, args) => WriteLine($"{args.Accelerometer.X:00.00} ; {args.Accelerometer.Y:00.00} ; {args.Accelerometer.Z:00.00}"));
         }
 
@@ -257,6 +312,7 @@ namespace PlaneGAME
             [Pose.WaveOut] = "MAIN A DROITE"
         };
 
+
         private static void Mgr_HeldPoseTriggered(object sender, MyoSharp.Device.PoseEventArgs e)
         {
             WriteLine($"HeldPose : {traductions[e.Pose]}");
@@ -264,7 +320,8 @@ namespace PlaneGAME
 
         private static void Mgr_PoseChanged(object sender, MyoSharp.Device.PoseEventArgs e)
         {
-            WriteLine($"{e.Pose}");
+            //WriteLine($"Pose : {e.Pose}");
+            //currentPos = e;
         }
 
         private static void Mgr_MyoUnlocked(object sender, MyoSharp.Device.MyoEventArgs e)

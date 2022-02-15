@@ -38,6 +38,20 @@ namespace PlaneGAME.Core.Game
 
             // if collision blablabla
         }
-    }
-}
 
+       /* protected override void Draw(GameTime gameTime)
+        {
+            _spriteBatch.Draw(
+                    torpilleTexture,
+                    torpillePosition,
+                    null,
+                    Color.White,
+                    0f,
+                    new Vector2(torpilleTexture.Width / 2, torpilleTexture.Height / 2),
+                    new Vector2((float)0.5, (float)0.5),
+                    SpriteEffects.None,
+                    0f
+                );
+        }*/
+       }
+       }
