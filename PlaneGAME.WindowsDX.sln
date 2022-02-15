@@ -6,6 +6,10 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "PlaneGAME.WindowsDX", "Plan
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "PlaneGAME.Core", "PlaneGAME.Core\PlaneGAME.Core.csproj", "{33F2B484-5C3E-4724-B7B9-79FB4009E952}"
 EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MyoLib", "myo\MyoLib\MyoLib.csproj", "{E5AAA702-1123-48BA-8BC5-83918DA7AD05}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MyoSharp", "myo\MyoSharp\MyoSharp.csproj", "{35A44F6D-2C48-4ACB-83E7-726CEF7CB661}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -20,6 +24,14 @@ Global
 		{33F2B484-5C3E-4724-B7B9-79FB4009E952}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{33F2B484-5C3E-4724-B7B9-79FB4009E952}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{33F2B484-5C3E-4724-B7B9-79FB4009E952}.Release|Any CPU.Build.0 = Release|Any CPU
+		{E5AAA702-1123-48BA-8BC5-83918DA7AD05}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{E5AAA702-1123-48BA-8BC5-83918DA7AD05}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{E5AAA702-1123-48BA-8BC5-83918DA7AD05}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{E5AAA702-1123-48BA-8BC5-83918DA7AD05}.Release|Any CPU.Build.0 = Release|Any CPU
+		{35A44F6D-2C48-4ACB-83E7-726CEF7CB661}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{35A44F6D-2C48-4ACB-83E7-726CEF7CB661}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{35A44F6D-2C48-4ACB-83E7-726CEF7CB661}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{35A44F6D-2C48-4ACB-83E7-726CEF7CB661}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
