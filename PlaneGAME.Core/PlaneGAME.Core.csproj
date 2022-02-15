@@ -16,8 +16,6 @@
     </PackageReference>
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\..\mchmyolib-master\MyoLib\MyoLib.csproj" />
-    <ProjectReference Include="..\..\mchmyolib-master\MyoSharp\MyoSharp.csproj" />
     <ProjectReference Include="..\myo\MyoLib\MyoLib.csproj" />
     <ProjectReference Include="..\myo\MyoSharp\MyoSharp.csproj" />
   </ItemGroup>
