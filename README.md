@@ -36,7 +36,7 @@ Copyright © 2022
 ## 🛠  Languages
 
 <p> 
-	<a href="https://gitlab.com/gitlab-org/gitlab" target="_blank"> 
-        <img src="https://www.vectorlogo.zone/logos/gitlab/gitlab-icon.svg" alt="gitlab" width="60" height="60"/> 
+	<a href="https://github.com/" target="_blank"> 
+        <img src="https://www.vectorlogo.zone/logos/github/github-icon.svg" alt="github" width="60" height="60"/> 
     </a> 
 </p>
