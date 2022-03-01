@@ -7,9 +7,13 @@ using System.Text;
 
 namespace PlaneGAME.Core.Game
 {
-    public class Torpille
+    public class Torpille : GameObject
     {
-        public Vector2 torpillePosition;
+        private GraphicsDeviceManager _graphics;
+        private SpriteBatch _spriteBatch;
+        Texture2D torpilleTexture;
+        Vector2 torpillePosition = Vector2.Zero;
+        Rectangle torpilleHitbox;
         float speed;
 
         public Torpille(float x)
@@ -20,7 +24,18 @@ namespace PlaneGAME.Core.Game
             speed = 500f;
         }
 
-        public Vector2 Update(GameTime gameTime)
+        public override void Initialize()
+        {
+            base.Initialize();
+        }
+
+        public override void LoadContent()
+        {
+            _spriteBatch = new SpriteBatch(GraphicsDevice);
+            torpilleTexture = Content.Load<Texture2D>("torpedo_black_revert");
+        }
+
+        public override void Update(GameTime gameTime)
         {
             Random rand = new Random();
             torpillePosition.X -= speed * (float)gameTime.ElapsedGameTime.TotalSeconds;
@@ -34,12 +49,9 @@ namespace PlaneGAME.Core.Game
             {
                 speed += 1f;
             }
-            return torpillePosition;
-
-            // if collision blablabla
         }
 
-       /* protected override void Draw(GameTime gameTime)
+        protected override void Draw(GameTime gameTime)
         {
             _spriteBatch.Draw(
                     torpilleTexture,
@@ -51,7 +63,7 @@ namespace PlaneGAME.Core.Game
                     new Vector2((float)0.5, (float)0.5),
                     SpriteEffects.None,
                     0f
-                );
-        }*/
-       }
-       }
+                    );
+        }
+    }
+}

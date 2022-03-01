@@ -1,4 +1,4 @@
-using Microsoft.Xna.Framework;
+﻿/*using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
 using PlaneGAME.Core.Game;
@@ -59,18 +59,18 @@ namespace PlaneGAME
         protected override void Initialize()
         {
             avion = new Avion();
-            avionPosition = new Vector2(avion.avionPosition.X,avion.avionPosition.Y);
+            avionPosition = new Vector2(avion.avionPosition.X, avion.avionPosition.Y);
             speed = 1000f;
 
             torpille = new Torpille(2000);
             torpillePosition = new Vector2(torpille.torpillePosition.X, torpille.torpillePosition.Y);
             torpille2 = new Torpille(2800);
             torpillePosition2 = new Vector2(torpille2.torpillePosition.X, torpille2.torpillePosition.Y);
-            if(difficulte != Difficulte.Facile)
+            if (difficulte != Difficulte.Facile)
             {
                 torpille3 = new Torpille(2400);
                 torpillePosition3 = new Vector2(torpille3.torpillePosition.X, torpille3.torpillePosition.Y);
-                if (difficulte!= Difficulte.Moyen)
+                if (difficulte != Difficulte.Moyen)
                 {
                     torpille4 = new Torpille(3200);
                     torpillePosition4 = new Vector2(torpille4.torpillePosition.X, torpille4.torpillePosition.Y);
@@ -157,13 +157,13 @@ namespace PlaneGAME
                 if (kstate.IsKeyDown(Keys.Down))
                     avionPosition.Y += speed * (float)gameTime.ElapsedGameTime.TotalSeconds;
 
-                if (kstate.IsKeyDown(Keys.Left)/* || currentPos.Pose == Pose.WaveIn*/)
+                if (kstate.IsKeyDown(Keys.Left))
                 {
                     avionPosition.X -= speed * (float)gameTime.ElapsedGameTime.TotalSeconds;
                     avionTexture = Content.Load<Texture2D>("plane_revert");
                 }
 
-                if (kstate.IsKeyDown(Keys.Right)/* || currentPos.Pose == Pose.WaveOut*/)
+                if (kstate.IsKeyDown(Keys.Right))
                 {
                     avionPosition.X += speed * (float)gameTime.ElapsedGameTime.TotalSeconds;
                     avionTexture = Content.Load<Texture2D>("plane");
@@ -179,19 +179,19 @@ namespace PlaneGAME
                 else if (avionPosition.Y < avionTexture.Height / 5)
                     avionPosition.Y = avionTexture.Height / 5;
 
-                torpille.Update(gameTime);
-                torpille2.Update(gameTime);
+                torpillePosition = torpille.Update(gameTime);
+                torpillePosition2 = torpille2.Update(gameTime);
                 if (difficulte != Difficulte.Facile)
                 {
-                    torpille3.Update(gameTime);
-                    if(difficulte != Difficulte.Moyen)
+                    torpillePosition3 = torpille3.Update(gameTime);
+                    if (difficulte != Difficulte.Moyen)
                     {
-                        torpille4.Update(gameTime);
+                        torpillePosition4 = torpille4.Update(gameTime);
                     }
                 }
 
-                avionHitbox = new Rectangle((int)avionPosition.X - avionTexture.Width/4, (int)avionPosition.Y - avionTexture.Height/4, avionTexture.Width/3 + avionTexture.Width/7,avionTexture.Height/3 + avionTexture.Height/8);
-                torpilleHitbox = new Rectangle((int)torpillePosition.X - torpilleTexture.Width/4, (int)torpillePosition.Y - torpilleTexture.Height/4, torpilleTexture.Width/3 + torpilleTexture.Width/7, torpilleTexture.Height/3 + torpilleTexture.Height/8);
+                avionHitbox = new Rectangle((int)avionPosition.X - avionTexture.Width / 4, (int)avionPosition.Y - avionTexture.Height / 4, avionTexture.Width / 3 + avionTexture.Width / 7, avionTexture.Height / 3 + avionTexture.Height / 8);
+                torpilleHitbox = new Rectangle((int)torpillePosition.X - torpilleTexture.Width / 4, (int)torpillePosition.Y - torpilleTexture.Height / 4, torpilleTexture.Width / 3 + torpilleTexture.Width / 7, torpilleTexture.Height / 3 + torpilleTexture.Height / 8);
                 torpilleHitbox2 = new Rectangle((int)torpillePosition2.X - torpilleTexture.Width / 4, (int)torpillePosition2.Y - torpilleTexture.Height / 4, torpilleTexture.Width / 3 + torpilleTexture.Width / 7, torpilleTexture.Height / 3 + torpilleTexture.Height / 8);
                 torpilleHitbox3 = new Rectangle(-500, -500, 0, 0);
                 torpilleHitbox4 = new Rectangle(-500, -500, 0, 0);
@@ -202,7 +202,7 @@ namespace PlaneGAME
                     {
                         torpilleHitbox4 = new Rectangle((int)torpillePosition4.X - torpilleTexture.Width / 4, (int)torpillePosition4.Y - torpilleTexture.Height / 4, torpilleTexture.Width / 3 + torpilleTexture.Width / 7, torpilleTexture.Height / 3 + torpilleTexture.Height / 8);
                     }
-                } 
+                }
             }
             base.Update(gameTime);
         }
@@ -246,7 +246,7 @@ namespace PlaneGAME
                     SpriteEffects.None,
                     0f
                 );
-                if(difficulte != Difficulte.Facile)
+                if (difficulte != Difficulte.Facile)
                 {
                     _spriteBatch.Draw(
                     torpilleTexture,
@@ -259,7 +259,7 @@ namespace PlaneGAME
                     SpriteEffects.None,
                     0f
                     );
-                    if(difficulte != Difficulte.Moyen)
+                    if (difficulte != Difficulte.Moyen)
                     {
                         _spriteBatch.Draw(
                     torpilleTexture,
@@ -282,7 +282,7 @@ namespace PlaneGAME
             {
                 _spriteBatch.Draw(background, new Rectangle(0, 0, 1920, 1080), Color.DarkGray);
                 _spriteBatch.DrawString(scoreFont, "HighScore : " + highScore.ToString(), new Vector2(660, 480), Color.Red);
-                _spriteBatch.DrawString(scoreFont, "Score : " + score.ToString(), new Vector2(700,400), Color.Red);
+                _spriteBatch.DrawString(scoreFont, "Score : " + score.ToString(), new Vector2(700, 400), Color.Red);
                 _spriteBatch.DrawString(scoreFont, "Perdu !", new Vector2(725, 330), Color.Red);
                 _spriteBatch.DrawString(scoreFont, "A: Facile   Z: Moyen   E: Difficile", new Vector2(500, 05), Color.Red);
                 _spriteBatch.DrawString(scoreFont, "Difficulte : " + difficulte.ToString(), new Vector2(630, 85), Color.Red);
@@ -356,6 +356,7 @@ namespace PlaneGAME
             WriteLine("Pose Sequence");
             mgr.AddPoseSequence(mgr.Myos.First(), Pose.Fist, Pose.FingersSpread);
         }
-        */
+        
     }
 }
+*/
