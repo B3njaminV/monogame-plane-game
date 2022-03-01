@@ -9,14 +9,12 @@ namespace PlaneGAME.Core.Game
 {
     public class Torpille : GameObject
     {
-        private GraphicsDeviceManager _graphics;
-        private SpriteBatch _spriteBatch;
         Texture2D torpilleTexture;
         Vector2 torpillePosition = Vector2.Zero;
         Rectangle torpilleHitbox;
         float speed;
 
-        public Torpille(float x)
+        public Torpille(float x,SpriteBatch spriteBatch, Microsoft.Xna.Framework.Game game) : base(game, spriteBatch)
         {
             Random rand = new Random();
             torpillePosition.Y = rand.Next(50,1030);
@@ -29,10 +27,10 @@ namespace PlaneGAME.Core.Game
             base.Initialize();
         }
 
-        public override void LoadContent()
+        protected override void LoadContent()
         {
-            _spriteBatch = new SpriteBatch(GraphicsDevice);
-            torpilleTexture = Content.Load<Texture2D>("torpedo_black_revert");
+            spriteBatch = new SpriteBatch(GraphicsDevice);
+            torpilleTexture = Game.Content.Load<Texture2D>("torpedo_black_revert");
         }
 
         public override void Update(GameTime gameTime)
@@ -45,15 +43,17 @@ namespace PlaneGAME.Core.Game
                 torpillePosition.Y = rand.Next(50, 1030);
             }
 
-            if(speed < 2000f)
+            torpilleHitbox = new Rectangle((int)torpillePosition.X - torpilleTexture.Width / 4, (int)torpillePosition.Y - torpilleTexture.Height / 4, torpilleTexture.Width / 3 + torpilleTexture.Width / 7, torpilleTexture.Height / 3 + torpilleTexture.Height / 8);
+
+            if (speed < 2000f)
             {
                 speed += 1f;
             }
         }
 
-        protected override void Draw(GameTime gameTime)
+        public override void Draw(GameTime gameTime)
         {
-            _spriteBatch.Draw(
+            spriteBatch.Draw(
                     torpilleTexture,
                     torpillePosition,
                     null,

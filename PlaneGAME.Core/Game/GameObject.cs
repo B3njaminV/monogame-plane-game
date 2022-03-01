@@ -5,7 +5,9 @@ namespace PlaneGAME.Core.Game
 {
     public class GameObject : DrawableGameComponent
     {
-        private SpriteBatch spriteBatch;
+        public SpriteBatch spriteBatch;
+        private Microsoft.Xna.Framework.Game game;
+
         public SpriteBatch SpriteBatch { get => spriteBatch; set => spriteBatch = value; }
 
 
