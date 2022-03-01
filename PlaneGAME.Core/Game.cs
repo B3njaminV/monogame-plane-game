@@ -43,8 +43,8 @@ namespace PlaneGAME
         int score = 0;
         int highScore = 0;
         SpriteFont scoreFont;
-        static MyoManager mgr;
-        MyoSharp.Device.MyoEventArgs e;
+        //static MyoManager mgr;
+        //MyoSharp.Device.MyoEventArgs e;
 
         public PlaneGAMEGame()
         {
@@ -77,8 +77,8 @@ namespace PlaneGAME
                 }
             }
 
-            mgr = new MyoManager();
-            mgr.Init();
+            //mgr = new MyoManager();
+            //mgr.Init();
             //mgr.MyoConnected += Mgr_MyoConnected;
             //mgr.MyoLocked += Mgr_MyoLocked;
             //mgr.MyoUnlocked += Mgr_MyoUnlocked;
@@ -292,7 +292,7 @@ namespace PlaneGAME
             _spriteBatch.End();
             base.Draw(gameTime);
         }
-
+        /*
         private static void Mgr_MyoConnected1(object sender, MyoSharp.Device.MyoEventArgs e)
         {
             //mgr.SubscribeToOrientationData(0, (source, args) => WriteLine($"{args.Yaw:0.00} ; {args.Pitch:0.00} ; {args.Roll:0.00}"));
@@ -357,6 +357,6 @@ namespace PlaneGAME
             WriteLine("Pose Sequence");
             mgr.AddPoseSequence(mgr.Myos.First(), Pose.Fist, Pose.FingersSpread);
         }
-
+        */
     }
 }
