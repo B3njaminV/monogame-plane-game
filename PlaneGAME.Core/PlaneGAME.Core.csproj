@@ -1,4 +1,4 @@
-<Project Sdk="Microsoft.NET.Sdk">
+﻿<Project Sdk="Microsoft.NET.Sdk">
   <PropertyGroup>
     <TargetFramework>net5.0</TargetFramework>
   </PropertyGroup>
@@ -9,6 +9,12 @@
   </ItemGroup>
   <ItemGroup>
     <None Remove="Content\PlaneGAME.mgcb" />
+    <None Remove="Game\score.xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Game\score.xml">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
   </ItemGroup>
   <ItemGroup>
     <PackageReference Include="MonoGame.Framework.DesktopGL" Version="3.8.0.1641">

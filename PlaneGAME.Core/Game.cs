@@ -21,7 +21,7 @@ namespace PlaneGAME
         Difficulte difficulte = Difficulte.Facile;
         bool pause = false;
         bool dead = false;
-        int score = 0;
+        Score score = new Score();
         int highScore = 0;
         SpriteFont scoreFont;
 
@@ -44,6 +44,7 @@ namespace PlaneGAME
         {
             _spriteBatch = new SpriteBatch(GraphicsDevice);
             background = Content.Load<Texture2D>("background");
+            score.Load("score.xml");
             scoreFont = Content.Load<SpriteFont>("score");
         }
 
@@ -75,7 +76,8 @@ namespace PlaneGAME
                 }
                 if (kstate.IsKeyDown(Keys.R))
                 {
-                    score = 0;
+                    score.Save("score.xml");
+                    score.reinitScore();
                     dead = false;
                     pause = false;
                     Initialize();
@@ -85,7 +87,7 @@ namespace PlaneGAME
 
             if (!pause)
             {
-                score += 1;
+                score.addPoint();
 
                 /*if (avionHitbox.Intersects(torpilleHitbox) || avionHitbox.Intersects(torpilleHitbox2) || avionHitbox.Intersects(torpilleHitbox3) || avionHitbox.Intersects(torpilleHitbox4))
                 {
@@ -106,7 +108,7 @@ namespace PlaneGAME
             if (!dead)
             {
                 _spriteBatch.Draw(background, new Rectangle(0, 0, 1920, 1080), Color.White);
-                _spriteBatch.DrawString(scoreFont, "Score : " + score.ToString(), new Vector2(20, 05), Color.Red);
+                _spriteBatch.DrawString(scoreFont, "Score : " + score, new Vector2(20, 05), Color.Red);
                 _spriteBatch.DrawString(scoreFont, "HighScore : " + highScore.ToString(), new Vector2(20, 85), Color.Red);
                 _spriteBatch.DrawString(scoreFont, "Difficulte : " + difficulte.ToString(), new Vector2(420, 05), Color.Red);
             }
