@@ -14,24 +14,26 @@ namespace PlaneGAME.Core.Game
         Vector2 torpillePosition = Vector2.Zero;
         Rectangle torpilleHitbox;
         Texture2D torpilleTexture;
-        List<Torpille> listeTorpilles;
+        List<Torpille> listeTorpilles = new List<Torpille>();
 
-        public TorpilleManager(Texture2D text, SpriteBatch spriteBatch, Microsoft.Xna.Framework.Game game) : base(game, spriteBatch)
+        public TorpilleManager(SpriteBatch spriteBatch, Microsoft.Xna.Framework.Game game) : base(game, spriteBatch)
         {
-            listeTorpilles.Add(new Torpille(2000, spriteBatch, game));
-            listeTorpilles.Add(new Torpille(3000, spriteBatch, game));
-            listeTorpilles.Add(new Torpille(4000, spriteBatch, game));
-            listeTorpilles.Add(new Torpille(5000, spriteBatch, game));
+            torpille = new Torpille(2000, spriteBatch, game);
+            listeTorpilles.Add(torpille);
+            torpille = new Torpille(3000, spriteBatch, game);
+            listeTorpilles.Add(torpille);
+            torpille = new Torpille(4000, spriteBatch, game);
+            listeTorpilles.Add(torpille);
+            torpille = new Torpille(5000, spriteBatch, game);
+            listeTorpilles.Add(torpille);
         }
 
         public override void Initialize()
         {
-            base.Initialize();
         }
 
         protected override void LoadContent()
         {
-            spriteBatch = new SpriteBatch(GraphicsDevice);
         }
 
         public override void Update(GameTime gameTime)

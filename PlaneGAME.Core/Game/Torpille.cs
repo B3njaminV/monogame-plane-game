@@ -16,20 +16,20 @@ namespace PlaneGAME.Core.Game
 
         public Torpille(float x,SpriteBatch spriteBatch, Microsoft.Xna.Framework.Game game) : base(game, spriteBatch)
         {
-            Random rand = new Random();
-            torpillePosition.Y = rand.Next(50,1030);
             torpillePosition.X = x;
-            speed = 500f;
+            this.Initialize();
+            this.LoadContent();
         }
 
         public override void Initialize()
         {
-            base.Initialize();
+            Random rand = new Random();
+            torpillePosition.Y = rand.Next(50, 1030);
+            speed = 500f;
         }
 
         protected override void LoadContent()
         {
-            spriteBatch = new SpriteBatch(GraphicsDevice);
             torpilleTexture = Game.Content.Load<Texture2D>("torpedo_black_revert");
         }
 

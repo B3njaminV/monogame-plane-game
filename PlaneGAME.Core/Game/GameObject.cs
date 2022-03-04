@@ -13,7 +13,7 @@ namespace PlaneGAME.Core.Game
 
         public GameObject(Microsoft.Xna.Framework.Game game, SpriteBatch spritebatch) : base(game)
         {
-            spriteBatch = spritebatch;
+           SpriteBatch = spritebatch;
         }
     }
 }
