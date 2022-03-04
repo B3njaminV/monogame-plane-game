@@ -24,29 +24,30 @@ namespace PlaneGAME.Core.Game
             listeTorpilles.Add(new Torpille(5000, spriteBatch, game));
         }
 
-        public void LoadContent()
+        public override void Initialize()
         {
+            base.Initialize();
+        }
+
+        protected override void LoadContent()
+        {
+            spriteBatch = new SpriteBatch(GraphicsDevice);
         }
 
         public override void Update(GameTime gameTime)
         {
-            base.Update(gameTime);
+            foreach(Torpille torpille in listeTorpilles)
+            {
+                torpille.Update(gameTime);
+            }
         }
 
         protected void Draw(GameTime gameTime, SpriteBatch _spriteBatch)
         {
-            _spriteBatch.Begin();
-            _spriteBatch.Draw(
-                    torpilleTexture,
-                    torpillePosition,
-                    null,
-                    Color.White,
-                    0f,
-                    new Vector2(torpilleTexture.Width / 2, torpilleTexture.Height / 2),
-                    new Vector2((float)0.5, (float)0.5),
-                    SpriteEffects.None,
-                    0f
-                );
+            foreach (Torpille torpille in listeTorpilles)
+            {
+                torpille.Draw(gameTime);
+            }
         }
     }
 }
