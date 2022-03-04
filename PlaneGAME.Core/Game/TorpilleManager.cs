@@ -8,21 +8,29 @@ using System.Threading.Tasks;
 
 namespace PlaneGAME.Core.Game
 {
-    class TorpilleManager : GameObject
+    public class TorpilleManager : GameObject
     {
         Torpille torpille;
         Vector2 torpillePosition = Vector2.Zero;
         Rectangle torpilleHitbox;
         Texture2D torpilleTexture;
+        List<Torpille> listeTorpilles;
 
-        public TorpilleManager(Texture2D text ){
-            torpilleTexture = text;
+        public TorpilleManager(Texture2D text, SpriteBatch spriteBatch, Microsoft.Xna.Framework.Game game) : base(game, spriteBatch)
+        {
+            listeTorpilles.Add(new Torpille(2000, spriteBatch, game));
+            listeTorpilles.Add(new Torpille(3000, spriteBatch, game));
+            listeTorpilles.Add(new Torpille(4000, spriteBatch, game));
+            listeTorpilles.Add(new Torpille(5000, spriteBatch, game));
         }
 
         public void LoadContent()
         {
-            torpille = new Torpille(2000);
-            torpillePosition = new Vector2(torpille.torpillePosition.X, torpille.torpillePosition.Y);
+        }
+
+        public override void Update(GameTime gameTime)
+        {
+            base.Update(gameTime);
         }
 
         protected void Draw(GameTime gameTime, SpriteBatch _spriteBatch)
