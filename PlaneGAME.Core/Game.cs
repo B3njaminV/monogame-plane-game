@@ -44,7 +44,7 @@ namespace PlaneGAME
         {
             _spriteBatch = new SpriteBatch(GraphicsDevice);
             background = Content.Load<Texture2D>("background");
-            score.Load("score.xml");
+            //score.Load("score.xml");
             scoreFont = Content.Load<SpriteFont>("score");
         }
 

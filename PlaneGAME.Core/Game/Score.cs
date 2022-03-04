@@ -27,7 +27,7 @@ namespace PlaneGAME.Core.Game
 
         public void reinitScore() => score = 0;
 
-        public Score Load(string path)
+        /*public Score Load(string path)
         {
             Score saved = null;
             XmlSerializer x = new XmlSerializer(typeof(Score));
@@ -36,7 +36,7 @@ namespace PlaneGAME.Core.Game
                 saved = (Score)x.Deserialize(st);
             }
             return saved;
-        }
+        }*/
 
         public void Save(string path)
         {

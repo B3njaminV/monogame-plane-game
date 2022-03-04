@@ -21,12 +21,10 @@ namespace PlaneGAME.Core.Game
         }
         public override void Initialize()
         {
-            base.Initialize();
         }
 
         protected override void LoadContent()
         {
-            spriteBatch = new SpriteBatch(GraphicsDevice);
             avionTexture = Game.Content.Load<Texture2D>("plane");
         }
 

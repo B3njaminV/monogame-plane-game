@@ -38,7 +38,7 @@ namespace PlaneGAME.Core.Game
 
         public override void Update(GameTime gameTime)
         {
-            foreach(Torpille torpille in listeTorpilles)
+            foreach (Torpille torpille in listeTorpilles)
             {
                 torpille.Update(gameTime);
             }
