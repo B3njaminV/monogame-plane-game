@@ -10,10 +10,12 @@ namespace PlaneGAME.Core.Game
 {
     class Collisionneur : GameObject
     {
+        private Microsoft.Xna.Framework.Game game;
         private List<Avion> listeAvion;
         private TorpilleManager torpilleM;
         private int largeur;
         private int hauteur;
+        public bool dead = false;
 
         public Collisionneur(List<Avion> avions,TorpilleManager tm, int width, int height, SpriteBatch spriteBatch, Microsoft.Xna.Framework.Game game) : base(game, spriteBatch)
         {
@@ -41,11 +43,7 @@ namespace PlaneGAME.Core.Game
                     if (avion.avionHitbox.Intersects(torpille.torpilleHitbox))
                     {
                         dead = true;
-                        pause = true;
-                        if (score > highScore)
-                        {
-                            highScore = score;
-                        }
+
                     }
                 }
             }
