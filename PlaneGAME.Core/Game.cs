@@ -22,8 +22,10 @@ namespace PlaneGAME
         bool pause = false;
         bool dead = false;
         Score score = new Score();
-        int highScore = 0;
-        SpriteFont scoreFont;
+        Score highScore = new Score();
+        Persistence persistence = new Persistence();
+        public String chemin = "Game/score.xml";
+        SpriteFont textureText;
         List<GameObject> listeGameObject = new List<GameObject>();
         List<Avion> listeAvion = new List<Avion>();
         private Collisionneur collisionneur;
@@ -54,8 +56,8 @@ namespace PlaneGAME
         protected override void LoadContent()
         {
             background = Content.Load<Texture2D>("background");
-            //score.Load("score.xml");
-            scoreFont = Content.Load<SpriteFont>("score");
+            textureText = Content.Load<SpriteFont>("score");
+            chargeHighScore();
         }
 
         protected override void Update(GameTime gameTime)
@@ -86,7 +88,6 @@ namespace PlaneGAME
                 }
                 if (kstate.IsKeyDown(Keys.R))
                 {
-                    score.Save("score.xml");
                     score.reinitScore();
                     dead = false;
                     pause = false;
@@ -95,24 +96,23 @@ namespace PlaneGAME
                 }
             }
 
-            if (!pause)
+            if (pause)
             {
                 score.addPoint();
 
-                foreach(GameObject gameObject in listeGameObject)
+                foreach (GameObject gameObject in listeGameObject)
                 {
                     gameObject.Update(gameTime);
                 }
-
-                /*if (avionHitbox.Intersects(torpilleHitbox) || avionHitbox.Intersects(torpilleHitbox2) || avionHitbox.Intersects(torpilleHitbox3) || avionHitbox.Intersects(torpilleHitbox4))
+                if (score.getPoint() > highScore.getPoint())
                 {
-                    dead = true;
-                    pause = true;
-                    if (score > highScore)
-                    {
-                        highScore = score;
-                    }
-                }*/
+                    persistence.Save(chemin, score);
+                }
+                chargeHighScore();
+            }
+            else
+            {
+                score.addPoint();
             }
             base.Update(gameTime);
         }
@@ -123,9 +123,9 @@ namespace PlaneGAME
             if (!dead)
             {
                 _spriteBatch.Draw(background, new Rectangle(0, 0, _graphics.PreferredBackBufferWidth, _graphics.PreferredBackBufferHeight), Color.White);
-                _spriteBatch.DrawString(scoreFont, "Score : " + score, new Vector2(20, 05), Color.Red);
-                _spriteBatch.DrawString(scoreFont, "HighScore : " + highScore.ToString(), new Vector2(20, 85), Color.Red);
-                _spriteBatch.DrawString(scoreFont, "Difficulte : " + difficulte.ToString(), new Vector2(420, 05), Color.Red);
+                _spriteBatch.DrawString(textureText, "Score : " + score, new Vector2(20, 05), Color.Red);
+                _spriteBatch.DrawString(textureText, "HighScore : " + highScore.ToString(), new Vector2(20, 85), Color.Red);
+                _spriteBatch.DrawString(textureText, "Difficulte : " + difficulte.ToString(), new Vector2(420, 05), Color.Red);
 
                 foreach (GameObject gameObject in listeGameObject)
                 {
@@ -135,15 +135,27 @@ namespace PlaneGAME
             else if (dead)
             {
                 _spriteBatch.Draw(background, new Rectangle(0, 0, _graphics.PreferredBackBufferWidth, _graphics.PreferredBackBufferHeight), Color.DarkGray);
-                _spriteBatch.DrawString(scoreFont, "HighScore : " + highScore.ToString(), new Vector2(660, 480), Color.Red);
-                _spriteBatch.DrawString(scoreFont, "Score : " + score.ToString(), new Vector2(700, 400), Color.Red);
-                _spriteBatch.DrawString(scoreFont, "Perdu !", new Vector2(725, 330), Color.Red);
-                _spriteBatch.DrawString(scoreFont, "A: Facile   Z: Moyen   E: Difficile", new Vector2(500, 05), Color.Red);
-                _spriteBatch.DrawString(scoreFont, "Difficulte : " + difficulte.ToString(), new Vector2(630, 85), Color.Red);
-                _spriteBatch.DrawString(scoreFont, "R: Restart", new Vector2(700, 550), Color.Red);
+                _spriteBatch.DrawString(textureText, "HighScore : " + highScore.ToString(), new Vector2(660, 480), Color.Red);
+                _spriteBatch.DrawString(textureText, "Score : " + score.ToString(), new Vector2(700, 400), Color.Red);
+                _spriteBatch.DrawString(textureText, "Perdu !", new Vector2(725, 330), Color.Red);
+                _spriteBatch.DrawString(textureText, "A: Facile   Z: Moyen   E: Difficile", new Vector2(500, 05), Color.Red);
+                _spriteBatch.DrawString(textureText, "Difficulte : " + difficulte.ToString(), new Vector2(630, 85), Color.Red);
+                _spriteBatch.DrawString(textureText, "R: Restart", new Vector2(700, 550), Color.Red);
             }
             _spriteBatch.End();
             base.Draw(gameTime);
+        }
+
+        public void chargeHighScore()
+        {
+            try
+            {
+                highScore = persistence.Load(chemin);
+            }
+            catch(Exception e)
+            {
+                Console.WriteLine("ERREUR PERSISTENCE : " + e);
+            }
         }
     }
 }
