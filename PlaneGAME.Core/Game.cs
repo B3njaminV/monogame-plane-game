@@ -46,15 +46,8 @@ namespace PlaneGAME
         {
             _spriteBatch = new SpriteBatch(GraphicsDevice);
             background = Content.Load<Texture2D>("background"); 
-            try
-            {
-                highScore = persistence.Load(chemin);
-            }
-            catch(Exception e)
-            {
-                Console.WriteLine(e);
-            }
             textureText = Content.Load<SpriteFont>("score");
+            chargeHighScore();
         }
 
         protected override void Update(GameTime gameTime)
@@ -99,6 +92,7 @@ namespace PlaneGAME
                 {
                     persistence.Save(chemin, score);
                 }
+                chargeHighScore();
             }
             else
             {
@@ -129,6 +123,18 @@ namespace PlaneGAME
             }
             _spriteBatch.End();
             base.Draw(gameTime);
+        }
+
+        public void chargeHighScore()
+        {
+            try
+            {
+                highScore = persistence.Load(chemin);
+            }
+            catch(Exception e)
+            {
+                Console.WriteLine("ERREUR PERSISTENCE : " + e);
+            }
         }
     }
 }
