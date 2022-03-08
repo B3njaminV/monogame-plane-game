@@ -10,17 +10,19 @@ namespace PlaneGAME.Core.Game
     public class Avion : GameObject
     {
         public Vector2 avionPosition;
-        Texture2D avionTexture;
-        Rectangle avionHitbox;
+        public Texture2D avionTexture;
+        public Rectangle avionHitbox;
         float speed;
         public Avion(SpriteBatch spriteBatch, Microsoft.Xna.Framework.Game game) : base(game, spriteBatch)
+        {
+            this.Initialize();
+            this.LoadContent();
+        }
+        public override void Initialize()
         {
             avionPosition.Y = 540;
             avionPosition.X = 960;
             speed = 1000f;
-        }
-        public override void Initialize()
-        {
         }
 
         protected override void LoadContent()
@@ -50,15 +52,7 @@ namespace PlaneGAME.Core.Game
                 avionTexture = Game.Content.Load<Texture2D>("plane");
             }
 
-            if (avionPosition.X > 1920 - avionTexture.Width / 5)
-                avionPosition.X = 1920 - avionTexture.Width / 5;
-            else if (avionPosition.X < avionTexture.Width / 5)
-                avionPosition.X = avionTexture.Width / 5;
 
-            if (avionPosition.Y > 1080 - avionTexture.Height / 5)
-                avionPosition.Y = 1080 - avionTexture.Height / 5;
-            else if (avionPosition.Y < avionTexture.Height / 5)
-                avionPosition.Y = avionTexture.Height / 5;
 
             avionHitbox = new Rectangle((int)avionPosition.X - avionTexture.Width / 4, (int)avionPosition.Y - avionTexture.Height / 4, avionTexture.Width / 3 + avionTexture.Width / 7, avionTexture.Height / 3 + avionTexture.Height / 8);
         }

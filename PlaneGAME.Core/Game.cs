@@ -24,6 +24,9 @@ namespace PlaneGAME
         Score score = new Score();
         int highScore = 0;
         SpriteFont scoreFont;
+        List<GameObject> listeGameObject = new List<GameObject>();
+        List<Avion> listeAvion = new List<Avion>();
+        private Collisionneur collisionneur;
 
         public PlaneGAMEGame()
         {
@@ -37,12 +40,19 @@ namespace PlaneGAME
 
         protected override void Initialize()
         {
+            _spriteBatch = new SpriteBatch(GraphicsDevice);
+            Avion avion = new Avion(_spriteBatch, this);
+            TorpilleManager tm = new TorpilleManager(_spriteBatch, this);
+            listeGameObject.Add(avion);
+            listeGameObject.Add(tm);
+            listeAvion.Add(avion);
+            collisionneur = new Collisionneur(listeAvion,tm, _graphics.PreferredBackBufferWidth, _graphics.PreferredBackBufferHeight,_spriteBatch,this);
+            listeGameObject.Add(collisionneur);
             base.Initialize();
         }
 
         protected override void LoadContent()
         {
-            _spriteBatch = new SpriteBatch(GraphicsDevice);
             background = Content.Load<Texture2D>("background");
             //score.Load("score.xml");
             scoreFont = Content.Load<SpriteFont>("score");
@@ -89,6 +99,11 @@ namespace PlaneGAME
             {
                 score.addPoint();
 
+                foreach(GameObject gameObject in listeGameObject)
+                {
+                    gameObject.Update(gameTime);
+                }
+
                 /*if (avionHitbox.Intersects(torpilleHitbox) || avionHitbox.Intersects(torpilleHitbox2) || avionHitbox.Intersects(torpilleHitbox3) || avionHitbox.Intersects(torpilleHitbox4))
                 {
                     dead = true;
@@ -107,14 +122,19 @@ namespace PlaneGAME
             _spriteBatch.Begin();
             if (!dead)
             {
-                _spriteBatch.Draw(background, new Rectangle(0, 0, 1920, 1080), Color.White);
+                _spriteBatch.Draw(background, new Rectangle(0, 0, _graphics.PreferredBackBufferWidth, _graphics.PreferredBackBufferHeight), Color.White);
                 _spriteBatch.DrawString(scoreFont, "Score : " + score, new Vector2(20, 05), Color.Red);
                 _spriteBatch.DrawString(scoreFont, "HighScore : " + highScore.ToString(), new Vector2(20, 85), Color.Red);
                 _spriteBatch.DrawString(scoreFont, "Difficulte : " + difficulte.ToString(), new Vector2(420, 05), Color.Red);
+
+                foreach (GameObject gameObject in listeGameObject)
+                {
+                    gameObject.Draw(gameTime);
+                }
             }
             else if (dead)
             {
-                _spriteBatch.Draw(background, new Rectangle(0, 0, 1920, 1080), Color.DarkGray);
+                _spriteBatch.Draw(background, new Rectangle(0, 0, _graphics.PreferredBackBufferWidth, _graphics.PreferredBackBufferHeight), Color.DarkGray);
                 _spriteBatch.DrawString(scoreFont, "HighScore : " + highScore.ToString(), new Vector2(660, 480), Color.Red);
                 _spriteBatch.DrawString(scoreFont, "Score : " + score.ToString(), new Vector2(700, 400), Color.Red);
                 _spriteBatch.DrawString(scoreFont, "Perdu !", new Vector2(725, 330), Color.Red);

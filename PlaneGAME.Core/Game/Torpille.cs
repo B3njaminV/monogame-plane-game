@@ -11,7 +11,7 @@ namespace PlaneGAME.Core.Game
     {
         Texture2D torpilleTexture;
         Vector2 torpillePosition = Vector2.Zero;
-        Rectangle torpilleHitbox;
+        public Rectangle torpilleHitbox;
         float speed;
 
         public Torpille(float x,SpriteBatch spriteBatch, Microsoft.Xna.Framework.Game game) : base(game, spriteBatch)
