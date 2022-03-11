@@ -10,19 +10,20 @@ namespace PlaneGAME.Core.Game
 {
     public class TorpilleManager : GameObject
     {
-        public Difficulte difficulte = Difficulte.Difficile;
+        public Difficulte difficulte;
         Torpille torpille;
         public List<Torpille> listeTorpilles = new List<Torpille>();
 
-        public TorpilleManager(SpriteBatch spriteBatch, Microsoft.Xna.Framework.Game game) : base(game, spriteBatch)
+        public TorpilleManager(Difficulte difficulte, SpriteBatch spriteBatch, Microsoft.Xna.Framework.Game game) : base(game, spriteBatch)
         {
+            this.difficulte = difficulte;
             torpille = new Torpille(2000, spriteBatch, game);
             listeTorpilles.Add(torpille);
-            torpille = new Torpille(2800, spriteBatch, game);
+            torpille = new Torpille(3000, spriteBatch, game);
             listeTorpilles.Add(torpille);
-            torpille = new Torpille(2400, spriteBatch, game);
+            torpille = new Torpille(2500, spriteBatch, game);
             listeTorpilles.Add(torpille);
-            torpille = new Torpille(3200, spriteBatch, game);
+            torpille = new Torpille(3500, spriteBatch, game);
             listeTorpilles.Add(torpille);
         }
 

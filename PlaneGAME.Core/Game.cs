@@ -19,6 +19,7 @@ namespace PlaneGAME
         private SpriteBatch _spriteBatch;
         Texture2D background;
         public bool pause = false;
+        Difficulte difficulte = Difficulte.Facile;
         Score score = new Score();
         Score highScore = new Score();
         Persistence persistence = new Persistence();
@@ -41,9 +42,11 @@ namespace PlaneGAME
 
         protected override void Initialize()
         {
+            listeGameObject.Clear();
+            listeAvion.Clear();
             _spriteBatch = new SpriteBatch(GraphicsDevice);
             Avion avion = new Avion(_spriteBatch, this);
-            tm = new TorpilleManager(_spriteBatch, this);
+            tm = new TorpilleManager(difficulte,_spriteBatch, this);
             listeGameObject.Add(avion);
             listeGameObject.Add(tm);
             listeAvion.Add(avion);
@@ -77,23 +80,23 @@ namespace PlaneGAME
                 pause = true;
                 if (kstate.IsKeyDown(Keys.A))
                 {
-                    tm.setDifficulte(Difficulte.Facile);
+                    difficulte = Difficulte.Facile;
                 }
                 if (kstate.IsKeyDown(Keys.Z))
                 {
-                    tm.setDifficulte(Difficulte.Moyen);
+                    difficulte = Difficulte.Moyen;
                 }
                 if (kstate.IsKeyDown(Keys.E))
                 {
-                    tm.setDifficulte(Difficulte.Difficile);
+                    difficulte = Difficulte.Difficile;
                 }
                 if (kstate.IsKeyDown(Keys.R))
                 {
                     score.reinitScore();
-                    collisionneur.dead = false;
-                    pause = false;
                     Initialize();
                     ResetElapsedTime();
+                    pause = false;
+                    collisionneur.dead = false;
                 }
             }
 
@@ -124,7 +127,7 @@ namespace PlaneGAME
                 _spriteBatch.Draw(background, new Rectangle(0, 0, _graphics.PreferredBackBufferWidth, _graphics.PreferredBackBufferHeight), Color.White);
                 _spriteBatch.DrawString(textureText, "Score : " + score.getPoint(), new Vector2(20, 05), Color.Red);
                 _spriteBatch.DrawString(textureText, "HighScore : " + highScore.getPoint(), new Vector2(20, 85), Color.Red);
-                _spriteBatch.DrawString(textureText, "Difficulte : " + tm.difficulte.ToString(), new Vector2(420, 05), Color.Red);
+                _spriteBatch.DrawString(textureText, "Difficulte : " + difficulte.ToString(), new Vector2(420, 05), Color.Red);
 
                 foreach (GameObject gameObject in listeGameObject)
                 {
@@ -138,7 +141,7 @@ namespace PlaneGAME
                 _spriteBatch.DrawString(textureText, "Score : " + score.getPoint(), new Vector2(700, 400), Color.Red);
                 _spriteBatch.DrawString(textureText, "Perdu !", new Vector2(725, 330), Color.Red);
                 _spriteBatch.DrawString(textureText, "A: Facile   Z: Moyen   E: Difficile", new Vector2(500, 05), Color.Red);
-                _spriteBatch.DrawString(textureText, "Difficulte : " + tm.difficulte.ToString(), new Vector2(630, 85), Color.Red);
+                _spriteBatch.DrawString(textureText, "Difficulte : " + difficulte.ToString(), new Vector2(630, 85), Color.Red);
                 _spriteBatch.DrawString(textureText, "R: Restart", new Vector2(700, 550), Color.Red);
             }
             _spriteBatch.End();
