@@ -13,42 +13,20 @@ namespace PlaneGAME.Core.Game
         public Difficulte difficulte;
         Torpille torpille;
         public List<Torpille> listeTorpilles = new List<Torpille>();
+        TorpillesFactory factory;
 
         public TorpilleManager(Difficulte difficulte, SpriteBatch spriteBatch, Microsoft.Xna.Framework.Game game) : base(game, spriteBatch)
         {
             this.difficulte = difficulte;
-            torpille = new Torpille(2000, spriteBatch, game);
-            listeTorpilles.Add(torpille);
-            torpille = new Torpille(3000, spriteBatch, game);
-            listeTorpilles.Add(torpille);
-            torpille = new Torpille(2500, spriteBatch, game);
-            listeTorpilles.Add(torpille);
-            torpille = new Torpille(3500, spriteBatch, game);
-            listeTorpilles.Add(torpille);
+            factory = new TorpillesFactory(difficulte, spriteBatch, game);
+            listeTorpilles = factory.GetListTorpille();
         }
 
         public override void Update(GameTime gameTime)
         {
-            if(difficulte == Difficulte.Facile)
+            foreach (Torpille torpille in listeTorpilles)
             {
-                foreach (Torpille torpille in listeTorpilles.SkipLast<Torpille>(2))
-                {
-                    torpille.Update(gameTime);
-                }
-            }
-            else if(difficulte == Difficulte.Moyen)
-            {
-                foreach (Torpille torpille in listeTorpilles.SkipLast<Torpille>(1))
-                {
-                    torpille.Update(gameTime);
-                }
-            }
-            else
-            {
-                foreach (Torpille torpille in listeTorpilles)
-                {
-                    torpille.Update(gameTime);
-                }
+                torpille.Update(gameTime);
             }
         }
 

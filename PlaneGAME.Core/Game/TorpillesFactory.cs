@@ -1,42 +1,50 @@
-﻿//using System;
-//using System.Collections.Generic;
-//using System.Linq;
-//using System.Text;
-//using System.Threading.Tasks;
+﻿using Microsoft.Xna.Framework.Graphics;
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+namespace PlaneGAME.Core.Game
+{
+    class TorpillesFactory : GameObject
+    {
+        List<Torpille> listeTorpilles = new List<Torpille>();
 
-//namespace PlaneGAME.Core.Game
-//{
-//    class TorpillesFactory
-//    {
-//        public List<Torpille> listeTorpilles = new List<Torpille>();
-//        public int nombreTorpille;
+        public TorpillesFactory(Difficulte difficulte, SpriteBatch spriteBatch, Microsoft.Xna.Framework.Game game) : base (game, spriteBatch)
+        {
+            Initialiser(difficulte);
+        }
 
-//        public TorpillesFactory(Difficulte difficulte) {
-//            listeTorpilles = null;
-//            nombreTorpille = ChercheTorpille(difficulte);
-//            fabrique(nombreTorpille);
+        public void Initialiser(Difficulte difficulte)
+        {
+            switch (difficulte)
+            {
+                case Difficulte.Facile:
+                    Ajouter(2);
+                    break;
+                case Difficulte.Moyen:
+                    Ajouter(3);
+                    break;
+                case Difficulte.Difficile:
+                    Ajouter(15);
+                    break;
+                default:
+                    break;
+            }
 
-//        }
+        }
 
-//        public int ChercheTorpille(Difficulte difficulte)
-//        {
-//            switch (difficulte)
-//            {
-//                case Difficulte.Facile:
-//                    return 2;
-//                case Difficulte.Moyen:
-//                    return 3;
-//                case Difficulte.Difficile:
-//                    return 4;
-//                default:
-//                    return 2;
-//            }
-       
-//        }
+        public void Ajouter(int nombre)
+        {
+            for(int i=0; i<nombre; i++)
+            {
+                listeTorpilles.Add(new Torpille(i*500+3000, spriteBatch, Game));
+            }
+        }
 
-//        public List<Torpille> fabrique(int nombre)
-//        {
-            
-//        }
-//    }
-//}
+        public List<Torpille> GetListTorpille()
+        {
+            return listeTorpilles;
+        }
+    }
+}
