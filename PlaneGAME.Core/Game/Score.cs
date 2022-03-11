@@ -13,14 +13,14 @@ namespace PlaneGAME.Core.Game
             score = 0;
         }
 
-        public int addPoint()=>score++;
+        public int AddPoint()=>score++;
 
-        public int getPoint()
+        public int GetPoint()
         {
             return score;
         }
 
-        public void reinitScore() => score = 0;        
+        public void ReinitScore() => score = 0;        
 
     }
 }
