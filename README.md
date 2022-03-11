@@ -14,6 +14,7 @@
 
 
 ## ⚙️ Configuration
+Notre modèle a été pensé comme pouvant être étendu, pour à l'avenir si 'lon veut rajouter des avions ou d'autres types d'obstacles
 
 
 ## ✍️ Auteur
