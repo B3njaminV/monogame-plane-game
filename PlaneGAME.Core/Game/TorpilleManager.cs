@@ -10,6 +10,7 @@ namespace PlaneGAME.Core.Game
 {
     public class TorpilleManager : GameObject
     {
+        public Difficulte difficulte = Difficulte.Difficile;
         Torpille torpille;
         public List<Torpille> listeTorpilles = new List<Torpille>();
 
@@ -27,9 +28,26 @@ namespace PlaneGAME.Core.Game
 
         public override void Update(GameTime gameTime)
         {
-            foreach (Torpille torpille in listeTorpilles)
+            if(difficulte == Difficulte.Facile)
             {
-                torpille.Update(gameTime);
+                foreach (Torpille torpille in listeTorpilles.SkipLast<Torpille>(2))
+                {
+                    torpille.Update(gameTime);
+                }
+            }
+            else if(difficulte == Difficulte.Moyen)
+            {
+                foreach (Torpille torpille in listeTorpilles.SkipLast<Torpille>(1))
+                {
+                    torpille.Update(gameTime);
+                }
+            }
+            else
+            {
+                foreach (Torpille torpille in listeTorpilles)
+                {
+                    torpille.Update(gameTime);
+                }
             }
         }
 
@@ -39,6 +57,11 @@ namespace PlaneGAME.Core.Game
             {
                 torpille.Draw(gameTime);
             }
+        }
+
+        public void setDifficulte(Difficulte difficulte)
+        {
+            this.difficulte = difficulte;
         }
     }
 }

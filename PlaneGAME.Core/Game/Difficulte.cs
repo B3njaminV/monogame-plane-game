@@ -4,7 +4,7 @@ using System.Text;
 
 namespace PlaneGAME.Core.Game
 {
-    enum Difficulte
+    public enum Difficulte
     {
         Facile = 0,
         Moyen = 1,
