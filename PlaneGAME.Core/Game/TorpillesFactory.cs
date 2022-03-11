@@ -26,7 +26,7 @@ namespace PlaneGAME.Core.Game
                     Ajouter(3);
                     break;
                 case Difficulte.Difficile:
-                    Ajouter(15);
+                    Ajouter(4);
                     break;
                 default:
                     break;
