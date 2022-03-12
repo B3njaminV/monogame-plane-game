@@ -11,11 +11,15 @@
 - Monogame
 
 ## ‍💻 Lancement (dans le dossier executable)
-
+#### 1 - Définir PlaneGame.Core comme projet de démarrage (si ce n'est déjà fait)
+#### 2 - F5 sur la solution et amusez-vous !
 
 ## ⚙️ Configuration
-Notre modèle a été pensé comme pouvant être étendu, pour à l'avenir si 'lon veut rajouter des avions ou d'autres types d'obstacles
+Aucune configuration spéciale requise
 
+## 🖊️ Documentation
+Vous pourrez trouver la documentation de notre projet dans PlaneGame.WindowDX/PlaneGame.Core/DiagrammeDeClasse.cd
+Notre modèle a été pensé comme pouvant être étendu. A l'avenir, notre modèle permet d'ajouter d'avantage d'avions ou d'obstacles comme des d'autres types de torpilles. 
 
 ## ✍️ Auteur
 
