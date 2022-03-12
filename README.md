@@ -41,6 +41,12 @@ Copyright © 2022
 ## 🛠  Languages
 
 <p> 
+    <a href="https://docs.microsoft.com/fr-fr/dotnet/csharp/" target="_blank"> 
+        <img src="https://static.cdnlogo.com/logos/c/27/c.svg" alt="csharp" width="60" height="60"/> 
+    </a> 
+    <a href="https://www.monogame.net/" target="_blank"> 
+        <img src="https://avatars.githubusercontent.com/u/4772066?s=280&v=4" alt="monogame" width="60" height="60"/> 
+    </a> 
 	<a href="https://github.com/" target="_blank"> 
         <img src="https://www.vectorlogo.zone/logos/github/github-icon.svg" alt="github" width="60" height="60"/> 
     </a> 
