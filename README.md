@@ -18,7 +18,8 @@
 Aucune configuration spéciale requise
 
 ## 🖊️ Documentation
-Vous pourrez trouver la documentation de notre projet dans `PlaneGame.Core/DiagrammeDeClasse.cd`
+Vous pourrez trouver la documentation de notre projet dans `PlaneGame.Core/DiagrammeDeClasse.cd`.
+
 Notre modèle a été pensé comme pouvant être étendu. A l'avenir, notre modèle permet d'ajouter d'avantage d'avions ou d'obstacles comme des d'autres types de torpilles. 
 
 ## ✍️ Auteur
