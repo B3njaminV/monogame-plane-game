@@ -1,0 +1,87 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ClassDiagram MajorVersion="1" MinorVersion="1" MembersFormat="NameAndType">
+  <Class Name="PlaneGAME.Core.Game.Avion">
+    <Position X="5.75" Y="4.5" Width="2" />
+    <TypeIdentifier>
+      <HashCode>AAQAAABAAAAAAwAAAAAAAAAAAAAAAQAABAAAAAIAAAQ=</HashCode>
+      <FileName>Game\Avion.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="PlaneGAME.Core.Game.Collisionneur">
+    <Position X="17.25" Y="5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAQAAAAAAAAAAAAAIAAAAAAAAAAAACGIAAAAAAAAAAA=</HashCode>
+      <FileName>Game\Collisionneur.cs</FileName>
+    </TypeIdentifier>
+    <ShowAsCollectionAssociation>
+      <Field Name="listeAvion" />
+    </ShowAsCollectionAssociation>
+  </Class>
+  <Class Name="PlaneGAME.Core.Game.GameObject">
+    <Position X="11.25" Y="0.5" Width="2.25" />
+    <TypeIdentifier>
+      <HashCode>AAAAAEAAAAAAAAAAAAAAAAAAAAAAAAAIQAAAAAAAAAA=</HashCode>
+      <FileName>Game\GameObject.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="PlaneGAME.Core.Game.Persistence">
+    <Position X="1.25" Y="6.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Game\Persistence.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="PlaneGAME.Core.Game.Score">
+    <Position X="3.25" Y="6.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAIAAAAAAQAAAAAAAIAAAAAAAAAAAAAAAAIAAAAAA=</HashCode>
+      <FileName>Game\Score.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="PlaneGAME.Core.Game.Torpille">
+    <Position X="8.25" Y="4.5" Width="2" />
+    <TypeIdentifier>
+      <HashCode>AAQAAAAAAAAAAwAAEAAAIAAAAACAAQAAAAAAAAAAAAQ=</HashCode>
+      <FileName>Game\Torpille.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="PlaneGAME.Core.Game.TorpilleManager">
+    <Position X="11.25" Y="4.5" Width="2" />
+    <TypeIdentifier>
+      <HashCode>AAQAEAAAAAAhAgAAAAAAAAAAAAAAACAAAAAAAAAABAA=</HashCode>
+      <FileName>Game\TorpilleManager.cs</FileName>
+    </TypeIdentifier>
+    <ShowAsCollectionAssociation>
+      <Field Name="listeTorpilles" />
+    </ShowAsCollectionAssociation>
+  </Class>
+  <Class Name="PlaneGAME.Core.Game.TorpillesFactory">
+    <Position X="14" Y="4.5" Width="2.25" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAEAAAAIAAAAAAAAAAAAAAAAAAAAABAA=</HashCode>
+      <FileName>Game\TorpillesFactory.cs</FileName>
+    </TypeIdentifier>
+    <ShowAsCollectionAssociation>
+      <Field Name="listeTorpilles" />
+    </ShowAsCollectionAssociation>
+  </Class>
+  <Class Name="PlaneGAME.PlaneGAMEGame">
+    <Position X="2" Y="0.5" Width="2.5" />
+    <TypeIdentifier>
+      <HashCode>AAQQEAAAAACAAwAAIAAIgAAAIAAEAAACAoAAAACAIAw=</HashCode>
+      <FileName>Game.cs</FileName>
+    </TypeIdentifier>
+    <ShowAsCollectionAssociation>
+      <Field Name="listeGameObject" />
+      <Field Name="listeAvion" />
+    </ShowAsCollectionAssociation>
+  </Class>
+  <Enum Name="PlaneGAME.Core.Game.Difficulte">
+    <Position X="5.5" Y="2.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AgAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAACAAABAA=</HashCode>
+      <FileName>Game\Difficulte.cs</FileName>
+    </TypeIdentifier>
+  </Enum>
+  <Font Name="Segoe UI" Size="9" />
+</ClassDiagram>
