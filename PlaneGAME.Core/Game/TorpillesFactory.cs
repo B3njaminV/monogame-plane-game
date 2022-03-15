@@ -6,6 +6,9 @@ using System.Text;
 using System.Threading.Tasks;
 namespace PlaneGAME.Core.Game
 {
+    /**
+     * Cette classe est une Factory qui permet de créer une liste avec un certain nombre de torpilles
+     */
     class TorpillesFactory : GameObject
     {
         List<Torpille> listeTorpilles = new List<Torpille>();
@@ -34,6 +37,9 @@ namespace PlaneGAME.Core.Game
 
         }
 
+        /**
+         * On ajoute (nombre) torpilles à notre liste de Torpilles
+         */
         public void Ajouter(int nombre)
         {
             for(int i=0; i<nombre; i++)
@@ -42,6 +48,9 @@ namespace PlaneGAME.Core.Game
             }
         }
 
+        /**
+         * On récupère notre liste de Torpilles
+         */
         public List<Torpille> GetListTorpille()
         {
             return listeTorpilles;
