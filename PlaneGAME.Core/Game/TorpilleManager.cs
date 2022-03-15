@@ -38,7 +38,7 @@ namespace PlaneGAME.Core.Game
             }
         }
 
-        public void setDifficulte(Difficulte difficulte)
+        public void SetDifficulte(Difficulte difficulte)
         {
             this.difficulte = difficulte;
         }

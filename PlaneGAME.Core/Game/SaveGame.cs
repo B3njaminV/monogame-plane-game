@@ -87,7 +87,7 @@ namespace PlaneGAME
             //mgr.PoseSequenceCompleted += Mgr_PoseSequenceCompleted;
             //mgr.MyoConnected += Mgr_MyoConnected1;
             //mgr.StartListening();
-            //ReadKey();
+            ReadKey();
 
             base.Initialize();
         }
