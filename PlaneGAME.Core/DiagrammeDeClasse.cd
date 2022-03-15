@@ -1,5 +1,5 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<ClassDiagram MajorVersion="1" MinorVersion="1" MembersFormat="NameAndType">
+<ClassDiagram MajorVersion="1" MinorVersion="1">
   <Class Name="PlaneGAME.Core.Game.Avion">
     <Position X="5.75" Y="4.5" Width="2" />
     <TypeIdentifier>
@@ -9,6 +9,11 @@
   </Class>
   <Class Name="PlaneGAME.Core.Game.Collisionneur">
     <Position X="17.25" Y="5" Width="1.5" />
+    <AssociationLine Name="listeAvion" Type="PlaneGAME.Core.Game.Avion">
+      <MemberNameLabel ManuallyPlaced="true">
+        <Position X="-1.675" Y="0.203" />
+      </MemberNameLabel>
+    </AssociationLine>
     <TypeIdentifier>
       <HashCode>AAQAAAAAAAAAAAAAIAAAAAAAAAAAACGIAAAAAAAAAAA=</HashCode>
       <FileName>Game\Collisionneur.cs</FileName>
@@ -46,7 +51,7 @@
     </TypeIdentifier>
   </Class>
   <Class Name="PlaneGAME.Core.Game.TorpilleManager">
-    <Position X="11.25" Y="4.5" Width="2" />
+    <Position X="11.5" Y="4.5" Width="2" />
     <TypeIdentifier>
       <HashCode>AAQAEAAAAAAhAgAAAAAAAAAAAAAAACAAAAAAAAAABAA=</HashCode>
       <FileName>Game\TorpilleManager.cs</FileName>
