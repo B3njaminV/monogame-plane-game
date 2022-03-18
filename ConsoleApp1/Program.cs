@@ -19,12 +19,12 @@ namespace TestConsole
             mgr.Init();
             mgr.UnlockAll(MyoSharp.Device.UnlockType.Hold);
             //mgr.MyoConnected += Mgr_MyoConnected;
-            //mgr.MyoLocked += Mgr_MyoLocked;
-            mgr.MyoUnlocked += Mgr_MyoUnlocked;
-            //mgr.PoseChanged += Mgr_PoseChanged;
+            mgr.MyoLocked += Mgr_MyoLocked;
+            //mgr.MyoUnlocked += Mgr_MyoUnlocked;
+            mgr.PoseChanged += Mgr_PoseChanged;
             //mgr.HeldPoseTriggered += Mgr_HeldPoseTriggered;
             //mgr.PoseSequenceCompleted += Mgr_PoseSequenceCompleted;
-            mgr.MyoConnected += Mgr_MyoConnected1;
+            //mgr.MyoConnected += Mgr_MyoConnected1;
             mgr.StartListening();
             ReadKey();
         }
@@ -65,6 +65,7 @@ namespace TestConsole
 
         private static void Mgr_MyoLocked(object sender, MyoSharp.Device.MyoEventArgs e)
         {
+            mgr.UnlockAll(MyoSharp.Device.UnlockType.Hold);
             WriteLine($"{e.Myo} has been locked");
         }
 

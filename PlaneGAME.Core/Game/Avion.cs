@@ -34,8 +34,9 @@ namespace PlaneGAME.Core.Game
             mgr = new MyoManager();
             mgr.Init();
             mgr.UnlockAll(MyoSharp.Device.UnlockType.Hold);
-            mgr.PoseChanged += Mgr_PoseChanged;
-            //mgr.MyoConnected += Mgr_MyoConnected1;
+            mgr.MyoLocked += Mgr_MyoLocked;
+            //mgr.PoseChanged += Mgr_PoseChanged;
+            mgr.MyoConnected += Mgr_MyoConnected1;
             mgr.StartListening();
         }
 
@@ -50,19 +51,19 @@ namespace PlaneGAME.Core.Game
         {
             var kstate = Keyboard.GetState();
 
-            if (kstate.IsKeyDown(Keys.Up) || pose == MyoSharp.Poses.Pose.FingersSpread)
+            if (kstate.IsKeyDown(Keys.Up) || pose == MyoSharp.Poses.Pose.)
                     avionPosition.Y -= speed* (float) gameTime.ElapsedGameTime.TotalSeconds;
 
-            if (kstate.IsKeyDown(Keys.Down) || pose == MyoSharp.Poses.Pose.Fist)
+            if (kstate.IsKeyDown(Keys.Down) || pose == MyoSharp.Poses.Pose.WaveIn)
                 avionPosition.Y += speed* (float) gameTime.ElapsedGameTime.TotalSeconds;
 
-            if (kstate.IsKeyDown(Keys.Left) || pose == MyoSharp.Poses.Pose.WaveIn)
+            if (kstate.IsKeyDown(Keys.Left) /*|| pose == MyoSharp.Poses.Pose.WaveIn*/)
             {
                 avionPosition.X -= speed* (float) gameTime.ElapsedGameTime.TotalSeconds;
                 avionTexture = Game.Content.Load<Texture2D>("plane_revert");
             }
 
-            if (kstate.IsKeyDown(Keys.Right) || pose == MyoSharp.Poses.Pose.WaveOut)
+            if (kstate.IsKeyDown(Keys.Right) /*|| pose == MyoSharp.Poses.Pose.WaveOut*/)
             {
                 avionPosition.X += speed* (float) gameTime.ElapsedGameTime.TotalSeconds;
                 avionTexture = Game.Content.Load<Texture2D>("plane");
@@ -96,8 +97,13 @@ namespace PlaneGAME.Core.Game
 
         private void Mgr_PoseChanged(object sender, MyoSharp.Device.PoseEventArgs e)
         {
-            mgr.Vibrate();
             pose = e.Pose;
+        }
+
+        private void Mgr_MyoLocked(object sender, MyoSharp.Device.MyoEventArgs e)
+        {
+            mgr.UnlockAll(MyoSharp.Device.UnlockType.Hold);
+            Console.WriteLine($"{e.Myo} has been locked");
         }
     }
 }
