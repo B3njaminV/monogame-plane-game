@@ -17,6 +17,7 @@ namespace TestConsole
         {
             mgr = new MyoManager();
             mgr.Init();
+            mgr.UnlockAll(MyoSharp.Device.UnlockType.Hold);
             //mgr.MyoConnected += Mgr_MyoConnected;
             //mgr.MyoLocked += Mgr_MyoLocked;
             mgr.MyoUnlocked += Mgr_MyoUnlocked;
