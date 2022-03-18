@@ -32,7 +32,7 @@ Notre modèle a été pensé comme pouvant être étendu. A l'avenir, notre mod�
 
 👤 **MIGNOTTE Jules**
 
-* GitHub:[@Mignottus](https://github.com/Mignottus)
+* GitHub: [@Mignottus](https://github.com/Mignottus)
 
 
 ## 📝 License
