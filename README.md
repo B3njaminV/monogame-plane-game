@@ -27,12 +27,12 @@ Notre modèle a été pensé comme pouvant être étendu. A l'avenir, notre mod�
 
 👤 **VALLEIX Benjamin**
 
-* Github: [@B3njaminV](https://github.com/B3njaminV)
+* GitHub: [@B3njaminV](https://github.com/B3njaminV)
 * LinkedIn: [@Benjamin VALLEIX](https://www.linkedin.com/in/benjamin-valleix-27115719a)
 
 👤 **MIGNOTTE Jules**
 
-* GitLab: [@mignottus]()
+* GitHub:[@Mignottus](https://github.com/Mignottus)
 
 
 ## 📝 License
