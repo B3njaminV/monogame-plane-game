@@ -41,7 +41,7 @@ namespace PlaneGAME.Core.Game
                     mgr.UnlockAll(MyoSharp.Device.UnlockType.Hold);
                     mgr.MyoLocked += Mgr_MyoLocked;
                     mgr.PoseChanged += Mgr_PoseChanged;
-                    //mgr.MyoConnected += Mgr_MyoConnected1;
+                    mgr.MyoConnected += Mgr_MyoConnected1;
                     mgr.StartListening();
                 }
             }
