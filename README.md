@@ -15,7 +15,8 @@
 #### 2 - F5 sur la solution et amusez-vous !
 
 ## ⚙️ Configuration
-Aucune configuration spéciale requise
+Notre jeu a la possibilité d'être joué avec le périphérique Myo.
+Pour cela, il vous suffira de placer le boolean myoOrNot a true dans la classe `Avion.cs`
 
 ## 🖊️ Documentation
 Vous pourrez trouver la documentation de notre projet dans `PlaneGame.Core/DiagrammeDeClasse.cd`.

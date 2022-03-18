@@ -15,11 +15,14 @@ namespace PlaneGAME.Core.Game
         public Rectangle avionHitbox;
         float speed;
         float x;
-        float y;
+        float y=0;
         SpriteFont textureText;
-
         MyoManager mgr;
         MyoSharp.Poses.Pose pose;
+
+        /* ==== Mettre le boolean a true si vous voulez jouer avec le Myo ==== */
+        Boolean myoOrNot = false;
+        /* ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ */
 
         public Avion(SpriteBatch spriteBatch, Microsoft.Xna.Framework.Game game) : base(game, spriteBatch)
         {
@@ -31,23 +34,16 @@ namespace PlaneGAME.Core.Game
             avionPosition.Y = 540;
             avionPosition.X = 960;
             speed = 1000f;
-
-            try
+            
+            if (myoOrNot)
             {
                 mgr = new MyoManager();
-                if(mgr != null)
-                {
-                    mgr.Init();
-                    mgr.UnlockAll(MyoSharp.Device.UnlockType.Hold);
-                    mgr.MyoLocked += Mgr_MyoLocked;
-                    mgr.PoseChanged += Mgr_PoseChanged;
-                    mgr.MyoConnected += Mgr_MyoConnected;
-                    mgr.StartListening();
-                }
-            }
-            catch(Exception e)
-            {
-                Console.WriteLine($"ERREUR : {e}");
+                mgr.Init();
+                mgr.UnlockAll(MyoSharp.Device.UnlockType.Hold);
+                mgr.MyoLocked += Mgr_MyoLocked;
+                mgr.PoseChanged += Mgr_PoseChanged;
+                mgr.MyoConnected += Mgr_MyoConnected;
+                mgr.StartListening();
             }
         }
 
@@ -62,10 +58,10 @@ namespace PlaneGAME.Core.Game
         {
             var kstate = Keyboard.GetState();
 
-            if (kstate.IsKeyDown(Keys.Up) || y < 20)
-                    avionPosition.Y -= speed* (float) gameTime.ElapsedGameTime.TotalSeconds;
+            if (kstate.IsKeyDown(Keys.Up) || y < -20)
+                avionPosition.Y -= speed* (float) gameTime.ElapsedGameTime.TotalSeconds;
 
-            if (kstate.IsKeyDown(Keys.Down) || y > -20)
+            if (kstate.IsKeyDown(Keys.Down) || y > 20)
                 avionPosition.Y += speed* (float) gameTime.ElapsedGameTime.TotalSeconds;
 
             if (kstate.IsKeyDown(Keys.Left) || pose == MyoSharp.Poses.Pose.WaveIn)
