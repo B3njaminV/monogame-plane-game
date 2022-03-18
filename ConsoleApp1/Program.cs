@@ -19,7 +19,7 @@ namespace TestConsole
             mgr.Init();
             //mgr.MyoConnected += Mgr_MyoConnected;
             //mgr.MyoLocked += Mgr_MyoLocked;
-            //mgr.MyoUnlocked += Mgr_MyoUnlocked;
+            mgr.MyoUnlocked += Mgr_MyoUnlocked;
             //mgr.PoseChanged += Mgr_PoseChanged;
             //mgr.HeldPoseTriggered += Mgr_HeldPoseTriggered;
             //mgr.PoseSequenceCompleted += Mgr_PoseSequenceCompleted;
@@ -66,7 +66,6 @@ namespace TestConsole
         {
             WriteLine($"{e.Myo} has been locked");
         }
-
 
 
         private async static void Mgr_MyoConnected(object sender, MyoSharp.Device.MyoEventArgs e)
