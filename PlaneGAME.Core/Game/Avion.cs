@@ -17,7 +17,6 @@ namespace PlaneGAME.Core.Game
         SpriteFont textureText;
 
         MyoManager mgr;
-        MyoSharp.Device.MyoEventArgs ear;
         MyoSharp.Poses.Pose pose;
 
         public Avion(SpriteBatch spriteBatch, Microsoft.Xna.Framework.Game game) : base(game, spriteBatch)
@@ -31,13 +30,23 @@ namespace PlaneGAME.Core.Game
             avionPosition.X = 960;
             speed = 1000f;
 
-            mgr = new MyoManager();
-            mgr.Init();
-            mgr.UnlockAll(MyoSharp.Device.UnlockType.Hold);
-            mgr.MyoLocked += Mgr_MyoLocked;
-            //mgr.PoseChanged += Mgr_PoseChanged;
-            mgr.MyoConnected += Mgr_MyoConnected1;
-            mgr.StartListening();
+            try
+            {
+                mgr = new MyoManager();
+                if(mgr == null)
+                {
+                    mgr.Init();
+                    mgr.UnlockAll(MyoSharp.Device.UnlockType.Hold);
+                    mgr.MyoLocked += Mgr_MyoLocked;
+                    mgr.PoseChanged += Mgr_PoseChanged;
+                    //mgr.MyoConnected += Mgr_MyoConnected1;
+                    mgr.StartListening();
+                }
+            }
+            catch(Exception e)
+            {
+                Console.WriteLine($"ERREUR : {e}");
+            }
         }
 
 
@@ -51,7 +60,7 @@ namespace PlaneGAME.Core.Game
         {
             var kstate = Keyboard.GetState();
 
-            if (kstate.IsKeyDown(Keys.Up) || pose == MyoSharp.Poses.Pose.)
+            if (kstate.IsKeyDown(Keys.Up) || pose == MyoSharp.Poses.Pose.WaveOut)
                     avionPosition.Y -= speed* (float) gameTime.ElapsedGameTime.TotalSeconds;
 
             if (kstate.IsKeyDown(Keys.Down) || pose == MyoSharp.Poses.Pose.WaveIn)
