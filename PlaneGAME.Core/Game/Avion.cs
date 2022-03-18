@@ -35,13 +35,13 @@ namespace PlaneGAME.Core.Game
             try
             {
                 mgr = new MyoManager();
-                if(mgr == null)
+                if(mgr != null)
                 {
                     mgr.Init();
                     mgr.UnlockAll(MyoSharp.Device.UnlockType.Hold);
                     mgr.MyoLocked += Mgr_MyoLocked;
                     mgr.PoseChanged += Mgr_PoseChanged;
-                    mgr.MyoConnected += Mgr_MyoConnected1;
+                    mgr.MyoConnected += Mgr_MyoConnected;
                     mgr.StartListening();
                 }
             }
@@ -68,13 +68,13 @@ namespace PlaneGAME.Core.Game
             if (kstate.IsKeyDown(Keys.Down) || y > -20)
                 avionPosition.Y += speed* (float) gameTime.ElapsedGameTime.TotalSeconds;
 
-            if (kstate.IsKeyDown(Keys.Left) || x < -30 || pose == MyoSharp.Poses.Pose.WaveIn)
+            if (kstate.IsKeyDown(Keys.Left) || pose == MyoSharp.Poses.Pose.WaveIn)
             {
                 avionPosition.X -= speed* (float) gameTime.ElapsedGameTime.TotalSeconds;
                 avionTexture = Game.Content.Load<Texture2D>("plane_revert");
             }
 
-            if (kstate.IsKeyDown(Keys.Right) || x > 30 || pose == MyoSharp.Poses.Pose.WaveOut)
+            if (kstate.IsKeyDown(Keys.Right) || pose == MyoSharp.Poses.Pose.WaveOut)
             {
                 avionPosition.X += speed* (float) gameTime.ElapsedGameTime.TotalSeconds;
                 avionTexture = Game.Content.Load<Texture2D>("plane");
@@ -98,10 +98,9 @@ namespace PlaneGAME.Core.Game
                     );
         }
 
-        private void Mgr_MyoConnected1(object sender, MyoSharp.Device.MyoEventArgs e)
+        private void Mgr_MyoConnected(object sender, MyoSharp.Device.MyoEventArgs e)
         {
             mgr.SubscribeToGyroscopeData(0, (source, args) => y = args.Gyroscope.Y);
-            //mgr.SubscribeToGyroscopeData(0, (source, args) => x = args.Gyroscope.X);
         }
 
         private void Mgr_PoseChanged(object sender, MyoSharp.Device.PoseEventArgs e)
@@ -112,7 +111,6 @@ namespace PlaneGAME.Core.Game
         private void Mgr_MyoLocked(object sender, MyoSharp.Device.MyoEventArgs e)
         {
             mgr.UnlockAll(MyoSharp.Device.UnlockType.Hold);
-            Console.WriteLine($"{e.Myo} has been locked");
         }
     }
 }
