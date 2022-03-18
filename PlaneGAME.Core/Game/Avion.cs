@@ -21,7 +21,7 @@ namespace PlaneGAME.Core.Game
         MyoSharp.Poses.Pose pose;
 
         /* ==== Mettre le boolean a true si vous voulez jouer avec le Myo ==== */
-        Boolean myoOrNot = false;
+        Boolean myoOrNot = true;
         /* ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ */
 
         public Avion(SpriteBatch spriteBatch, Microsoft.Xna.Framework.Game game) : base(game, spriteBatch)
@@ -32,7 +32,7 @@ namespace PlaneGAME.Core.Game
         public override void Initialize()
         {
             avionPosition.Y = 540;
-            avionPosition.X = 960;
+            avionPosition.X = 160;
             speed = 1000f;
             
             if (myoOrNot)
