@@ -13,7 +13,9 @@ namespace PlaneGAME.Core.Game
         public Vector2 avionPosition;
         public Texture2D avionTexture;
         public Rectangle avionHitbox;
-        float speed; 
+        float speed;
+        float x;
+        float y;
         SpriteFont textureText;
 
         MyoManager mgr;
@@ -35,7 +37,7 @@ namespace PlaneGAME.Core.Game
             mgr.Init();
             mgr.UnlockAll(MyoSharp.Device.UnlockType.Hold);
             mgr.MyoLocked += Mgr_MyoLocked;
-            //mgr.PoseChanged += Mgr_PoseChanged;
+            mgr.PoseChanged += Mgr_PoseChanged;
             mgr.MyoConnected += Mgr_MyoConnected1;
             mgr.StartListening();
         }
@@ -51,19 +53,19 @@ namespace PlaneGAME.Core.Game
         {
             var kstate = Keyboard.GetState();
 
-            if (kstate.IsKeyDown(Keys.Up) || pose == MyoSharp.Poses.Pose.)
+            if (kstate.IsKeyDown(Keys.Up) || y < 20)
                     avionPosition.Y -= speed* (float) gameTime.ElapsedGameTime.TotalSeconds;
 
-            if (kstate.IsKeyDown(Keys.Down) || pose == MyoSharp.Poses.Pose.WaveIn)
+            if (kstate.IsKeyDown(Keys.Down) || y > -20)
                 avionPosition.Y += speed* (float) gameTime.ElapsedGameTime.TotalSeconds;
 
-            if (kstate.IsKeyDown(Keys.Left) /*|| pose == MyoSharp.Poses.Pose.WaveIn*/)
+            if (kstate.IsKeyDown(Keys.Left) || x < -30 || pose == MyoSharp.Poses.Pose.WaveIn)
             {
                 avionPosition.X -= speed* (float) gameTime.ElapsedGameTime.TotalSeconds;
                 avionTexture = Game.Content.Load<Texture2D>("plane_revert");
             }
 
-            if (kstate.IsKeyDown(Keys.Right) /*|| pose == MyoSharp.Poses.Pose.WaveOut*/)
+            if (kstate.IsKeyDown(Keys.Right) || x > 30 || pose == MyoSharp.Poses.Pose.WaveOut)
             {
                 avionPosition.X += speed* (float) gameTime.ElapsedGameTime.TotalSeconds;
                 avionTexture = Game.Content.Load<Texture2D>("plane");
@@ -85,15 +87,13 @@ namespace PlaneGAME.Core.Game
                     SpriteEffects.None,
                     0f
                     );
-            spriteBatch.DrawString(textureText, pose.ToString(), new Vector2(630, 85), Color.Red);
         }
 
-        /*private static void Mgr_MyoConnected1(object sender, MyoSharp.Device.MyoEventArgs e)
+        private void Mgr_MyoConnected1(object sender, MyoSharp.Device.MyoEventArgs e)
         {
-            //mgr.SubscribeToOrientationData(0, (source, args) => WriteLine($"{args.Yaw:0.00} ; {args.Pitch:0.00} ; {args.Roll:0.00}"));
-
-            mgr.SubscribeToAccelerometerData(0, (source, args) => WriteLine($"{args.Accelerometer.X:00.00} ; {args.Accelerometer.Y:00.00} ; {args.Accelerometer.Z:00.00}"));
-        }*/
+            mgr.SubscribeToGyroscopeData(0, (source, args) => y = args.Gyroscope.Y);
+            //mgr.SubscribeToGyroscopeData(0, (source, args) => x = args.Gyroscope.X);
+        }
 
         private void Mgr_PoseChanged(object sender, MyoSharp.Device.PoseEventArgs e)
         {
