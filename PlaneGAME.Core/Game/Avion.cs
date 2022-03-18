@@ -66,13 +66,13 @@ namespace PlaneGAME.Core.Game
             if (kstate.IsKeyDown(Keys.Down) || pose == MyoSharp.Poses.Pose.WaveIn)
                 avionPosition.Y += speed* (float) gameTime.ElapsedGameTime.TotalSeconds;
 
-            if (kstate.IsKeyDown(Keys.Left) /*|| pose == MyoSharp.Poses.Pose.WaveIn*/)
+            if (kstate.IsKeyDown(Keys.Left) || pose == MyoSharp.Poses.Pose.Rest)
             {
                 avionPosition.X -= speed* (float) gameTime.ElapsedGameTime.TotalSeconds;
                 avionTexture = Game.Content.Load<Texture2D>("plane_revert");
             }
 
-            if (kstate.IsKeyDown(Keys.Right) /*|| pose == MyoSharp.Poses.Pose.WaveOut*/)
+            if (kstate.IsKeyDown(Keys.Right) || pose == MyoSharp.Poses.Pose.DoubleTap)
             {
                 avionPosition.X += speed* (float) gameTime.ElapsedGameTime.TotalSeconds;
                 avionTexture = Game.Content.Load<Texture2D>("plane");
