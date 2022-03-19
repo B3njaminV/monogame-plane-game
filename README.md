@@ -15,8 +15,10 @@
 #### 2 - F5 sur la solution et amusez-vous !
 
 ## ⚙️ Configuration
-Notre jeu a la possibilité d'être joué avec le périphérique Myo.
-Pour cela, il vous suffira de placer le boolean myoOrNot a true dans la classe `Avion.cs`
+Notre jeu a la possibilité d'être joué avec le périphérique [Myo](https://github.com/tayfuzun/MyoSharp).
+Myo est brassard qui contrôle vos mouvemements pour déclencher diverses actions sur votre ordinateur.
+
+Pour jouer avec le [Myo](https://github.com/tayfuzun/MyoSharp), vous devrez avant toute chose le calibrer et placer le boolean myoOrNot a **true** dans la classe `Avion.cs`
 
 ## 🖊️ Documentation
 Vous pourrez trouver la documentation de notre projet dans `PlaneGame.Core/DiagrammeDeClasse.cd`.
