@@ -1,6 +1,6 @@
 <h1 align="center"> Plane 👋</h1>
 
-> Plane Game
+> Plane Game est un jeu d'arcade, le but est simple : éviter les torpilles en controlant l'avion avec les touches directionnelles de votre clavier ou le [Myo](https://github.com/tayfuzun/MyoSharp)
 
 ### 🏠 [Homepage](https://github.com/B3njaminV/monogame-plane-game)
 
@@ -24,6 +24,10 @@ Pour jouer avec le [Myo](https://github.com/tayfuzun/MyoSharp), vous devrez avan
 Vous pourrez trouver la documentation de notre projet dans `PlaneGame.Core/DiagrammeDeClasse.cd`.
 
 Notre modèle a été pensé comme pouvant être étendu. A l'avenir, notre modèle permet d'ajouter d'avantage d'avions ou d'obstacles comme d'autres types de torpilles. 
+
+## 🎥 Vidéo
+Afin de mieux visualiser notre projet, vous pourrez trouver dans le projet une vidéo de test avec le [Myo](https://github.com/tayfuzun/MyoSharp).
+
 
 ## ✍️ Auteur
 
