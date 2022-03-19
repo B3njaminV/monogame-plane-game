@@ -21,7 +21,7 @@ namespace PlaneGAME.Core.Game
         MyoSharp.Poses.Pose pose;
 
         /* ==== Mettre le boolean a true si vous voulez jouer avec le Myo ==== */
-        Boolean myoOrNot = true;
+        Boolean myoOrNot = false;
         /* ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ */
 
         public Avion(SpriteBatch spriteBatch, Microsoft.Xna.Framework.Game game) : base(game, spriteBatch)
