@@ -26,7 +26,7 @@ Vous pourrez trouver la documentation de notre projet dans `PlaneGame.Core/Diagr
 Notre modèle a été pensé comme pouvant être étendu. A l'avenir, notre modèle permet d'ajouter d'avantage d'avions ou d'obstacles comme d'autres types de torpilles. 
 
 ## 🎥 Vidéo
-Afin de mieux visualiser notre projet, vous pourrez trouver dans le projet une vidéo de test avec le [Myo](https://github.com/tayfuzun/MyoSharp).
+Afin de mieux visualiser notre projet, [cliquez-ici](https://youtu.be/j9RbK7ho_t0) pour trouver une vidéo de test avec le [Myo](https://github.com/tayfuzun/MyoSharp).
 
 
 ## ✍️ Auteur
