@@ -4,6 +4,7 @@
 
 ### 🏠 [Homepage](https://github.com/B3njaminV/monogame-plane-game)
 
+![image](./PlaneGAME.Core/Content/monogame.png)
 
 ## 📍 Prérequis
 
